@@ -7,8 +7,8 @@ body {
 
  /* 毛玻璃滤镜 */ 
 #board {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
 }
 
 .index-card {
