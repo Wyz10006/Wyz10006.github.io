@@ -1,0 +1,23 @@
+/* 设置背景图片 */
+body {
+  background: url(/img/首页.jpg);
+  background-attachment: fixed;
+  background-size: cover;  
+}
+
+ /* 毛玻璃滤镜 */ 
+#board {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.index-card {
+  transition: all 0.5s;
+  transform: scale(calc(1.5 - 0.5 * var(--state)));
+  opacity: var(--state);
+  margin-bottom: 2rem;
+}
+
+.index-img img {
+  margin: 20px 0;
+}
