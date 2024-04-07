@@ -772,8 +772,11 @@ sup > a::before,
 .sidebar {
   position: -webkit-sticky;
   position: sticky;
-  top: 2rem;
-  padding: 3rem 0;
+  top: 4rem;
+  padding: 1rem 1rem;
+  backdrop-filter: blur(10px); /* 添加毛玻璃滤镜 */
+  background-color: var(--board-bg-color);
+  border-radius: 10px;
 }
 html {
   font-size: 16px;
@@ -852,7 +855,7 @@ i.iconfont {
   --post-text-color: #2c3e50;
   --post-heading-color: #1a202c;
   --post-link-color: #0366d6;
-  --link-hover-color: #DCDCDC;
+  --link-hover-color: #30a9de;
   --link-hover-bg-color: #f8f9fa;
   --line-color: #eaecef;
   --navbar-bg-color: #2f4154;
@@ -879,7 +882,7 @@ i.iconfont {
     --post-text-color: #c4c6c9;
     --post-heading-color: #c4c6c9;
     --post-link-color: #1589e9;
-    --link-hover-color: #FFFFE0;
+    --link-hover-color: #30a9de;
     --link-hover-bg-color: #364151;
     --line-color: #435266;
     --navbar-bg-color: #1f3144;
@@ -933,7 +936,7 @@ i.iconfont {
     --post-text-color: #c4c6c9;
     --post-heading-color: #c4c6c9;
     --post-link-color: #1589e9;
-    --link-hover-color: #FFFFE0;
+    --link-hover-color: #30a9de;
     --link-hover-bg-color: #364151;
     --line-color: #435266;
     --navbar-bg-color: #1f3144;
