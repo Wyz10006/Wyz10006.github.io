@@ -856,7 +856,7 @@ i.iconfont {
   --post-heading-color: #1a202c;
   --post-link-color: #0366d6;
   --link-hover-color: #30a9de;
-  --link-hover-bg-color: #f8f9fa;
+  --link-hover-bg-color: #ffffff80;
   --line-color: #eaecef;
   --navbar-bg-color: #2f4154;
   --navbar-text-color: #fff;
@@ -2016,6 +2016,7 @@ input[type=checkbox] {
   display: flex;
   background-color: transparent;
   border: 0;
+  border-radius: 10px;
 }
 .list-group-item time {
   flex: 0 0 5rem;
