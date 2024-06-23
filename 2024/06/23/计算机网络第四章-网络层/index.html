@@ -42,8 +42,12 @@
 <meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/17.png">
 <meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/18.png">
 <meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/19.png">
+<meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/20.png">
+<meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/21.png">
+<meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/22.png">
+<meta property="og:image" content="https://wyz10006.github.io/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/23.png">
 <meta property="article:published_time" content="2024-06-23T11:41:12.000Z">
-<meta property="article:modified_time" content="2024-06-23T11:41:25.835Z">
+<meta property="article:modified_time" content="2024-06-23T16:58:38.317Z">
 <meta property="article:author" content="心逍遥">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +279,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k 字
+          18k 字
         
       </span>
     
@@ -286,7 +290,7 @@
         
         
         
-          114 分钟
+          154 分钟
         
       </span>
     
@@ -1016,7 +1020,7 @@
 <li>
 <p>CIDR的斜线表示法在IPv6中仍然可用。</p>
 <ul>
-<li>2 0 0 1 : 0 d b 8 : 0 0 0 0 : c d 3 0 : 0 0 0 0 : 0 0 0 0 : 0 0 0 0 : 0 0 0 0 / 6 0$\to$2 0 0 1 : d b 8 : 0 : c d 3 0 : : / 6 0</li>
+<li>2 0 0 1 : 0 d b 8 : 0 0 0 0 : c d 3 0 : 0 0 0 0 : 0 0 0 0 : 0 0 0 0 : 0 0 0 0 / 6 0 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> 2 0 0 1 : d b 8 : 0 : c d 3 0 : : / 6 0</li>
 </ul>
 </li>
 </ul>
@@ -1370,21 +1374,14 @@
 <img src="/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/19.png" srcset="/img/loading.gif" lazyload class="">
 <h3 id="6-内部网关协议开放最短路径优先ospf"><a class="markdownIt-Anchor" href="#6-内部网关协议开放最短路径优先ospf"></a> 6、内部网关协议——开放最短路径优先OSPF</h3>
 <ul>
-<li>
-<p>OSPF是基于链路状态的，而不像RIP是基于距离向量的，采用分布式的链路状态协议（Link State Protocol）。</p>
-</li>
-<li>
-<p>OSPF基于链路状态并采用最短路径算法计算路由，从算法上保证了不会产生路由环路。</p>
-</li>
-<li>
-<p>OSPF不限制网络规模（可再划分若干小区域），更新效率高，收敛速度快。</p>
-</li>
-<li>
-<p>OSPF协议的三个特点：</p>
+<li>OSPF是基于链路状态的，而不像RIP是基于距离向量的，采用分布式的链路状态协议（Link State Protocol）。</li>
+<li>OSPF基于链路状态并采用最短路径算法计算路由，从算法上保证了不会产生路由环路。</li>
+<li>OSPF不限制网络规模（可再划分若干小区域），更新效率高，收敛速度快。</li>
+<li>OSPF协议的三个特点：
 <ul>
 <li>向本自治系统中所有路由器发送信息，这里使用的方法是<strong>洪泛法</strong>（flooding）。
 <ul>
-<li>路由器通过多有输出端口向所有相邻的路由器发送信息，每一个相邻路由器又再将此信息发往其他所有的相邻路由器（除刚发来信息的那个路由器），直到所有路由器都得到了这个信息的副本。</li>
+<li>路由器通过所有输出端口向所有相邻的路由器发送信息，每一个相邻路由器又再将此信息发往其他所有的相邻路由器（除刚发来信息的那个路由器），直到所有路由器都得到了这个信息的副本。</li>
 </ul>
 </li>
 <li>发送的信息就是与本路由器相邻的所有路由器的链路状态，但这只是路由器所知道的<strong>部分信息</strong>。
@@ -1395,17 +1392,303 @@
 <li>只有当链路状态发生变化或每隔一段时间，路由器才用洪泛法向所有路由器发送此信息。</li>
 </ul>
 </li>
+<li>由于各路由器之间频繁地交换链路状态信息，因此所有的路由器最终都能建立一个<strong>链路状态数据库</strong>。</li>
+<li>这个数据库实际上就是全网的拓扑结构图，它在全网范围内是一致的（这称为链路状态数据库的同步）。</li>
+<li>OSPF 的链路状态数据库能较快地进行更新，使各个路由器能及时更新其路由表。</li>
+<li><strong>OSPF 的更新过程收敛得快是其重要优点</strong>。</li>
+</ul>
+<h4 id="链路代价的计算"><a class="markdownIt-Anchor" href="#链路代价的计算"></a> 链路代价的计算</h4>
+<ul>
+<li>链路状态是指哪些路由器相邻以及链路的“代价“（表示费用、距离、时延和带宽等，由网络管理人员决定）。</li>
+</ul>
+<img src="/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/20.png" srcset="/img/loading.gif" lazyload class="">
+<h4 id="邻居关系的建立和维护"><a class="markdownIt-Anchor" href="#邻居关系的建立和维护"></a> 邻居关系的建立和维护</h4>
+<ul>
+<li>OSPF相邻路由器之间通过交互问候（Hello）分组来建立和维护邻居关系。</li>
+<li><strong>问候分组封装在IP数据报中</strong>，发往组播地址224.0.0.5。IP数据报首部中的协议号字段的取值为89，表明IP数据报的数据载荷为OSPF分组。
+<ul>
+<li>OSPF分组直接使用网络层的IP数据报进行封装，RIP报文需要使用运输层用户数据报协议UDP封装。</li>
+<li><strong>从数据按网络体系结构逐层封装的角度看，OSPF属于网络层协议，而RIP属于应用层协议</strong>（但其核心功能是路由选择，属于网络层）。</li>
+</ul>
+</li>
+<li>每个路由器都会建立一张邻居表。</li>
+<li>问候分组的发送周期为10秒。</li>
+<li>若40秒未收到，认为邻居不可达。</li>
+</ul>
+<h4 id="链路状态通告"><a class="markdownIt-Anchor" href="#链路状态通告"></a> 链路状态通告</h4>
+<ul>
+<li>使用OSPF的每个路由器都会产生<strong>链路状态通告</strong>（Link State Advertisement，LSA）。
+<ul>
+<li>直连网络的链路状态信息。</li>
+<li>邻居路由器的链路状态信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="链路状态更新分组"><a class="markdownIt-Anchor" href="#链路状态更新分组"></a> 链路状态更新分组</h4>
+<ul>
+<li>链路状态通告被封装在链路状态更新（Link State Update，LSU）分组中，采用可靠的洪泛法进行发送。</li>
+<li>洪泛法的要点是路由器向自己所有的邻居路由器发送链路状态更新分组，收到该分组的各路由器又将该分组转发给自己所有的邻居路由器（但其上游路由器除外），以此类推。</li>
+<li><strong>可靠是指收到链路状态更新分组后要发送确认</strong>，收到重复的更新分组无需再次转发，但要发送一次确认。</li>
+<li>通过各路由器洪泛发送封装有各自链路状态通告LSA的链路状态更新LSU分组，各路由器的链路状态数据库LSDB最终将达到一致。</li>
+</ul>
+<h4 id="基于链路状态数据库进行最短路径优先计算"><a class="markdownIt-Anchor" href="#基于链路状态数据库进行最短路径优先计算"></a> 基于链路状态数据库进行最短路径优先计算</h4>
+<ul>
+<li>基于链路状态数据库LSDB进行最短路径优先计算，构建出各自到达其他各路由器的最短路径，即路由表。</li>
+</ul>
+<h4 id="五种分组类型"><a class="markdownIt-Anchor" href="#五种分组类型"></a> 五种分组类型</h4>
+<ul>
+<li>问候 （Hello）：用来发现和维护邻居路由器的可达性。</li>
+<li>数据库描述 （Database Description）：用来向邻居路由器给出自己的链路状态数据库中的所有链路状态项目的摘要信息。</li>
+<li>链路状态请求 （Link State Request）：用来向邻居路由器请求发送某些链路状态项目的详细信息。</li>
+<li>链路状态更新 （Link State Update）：路由器使用链路状态更新分组将其链路状态信息进行洪泛发送，即用 洪泛法对整个系统更新链路状态。</li>
+<li>链路状态确认 （Link State Acknowledgement）：对链路状态更新分组的确认分组。</li>
+</ul>
+<h4 id="减少洪泛广播"><a class="markdownIt-Anchor" href="#减少洪泛广播"></a> 减少洪泛（广播）</h4>
+<ul>
+<li>为了减少洪泛发送问候分组和链路状态更新分组的数量，OSPF采用以下措施：
+<ul>
+<li>选举<strong>指定路由器</strong>（Designated Router，DR）和<strong>备用指定路由器</strong>（Backup Designated Router，BDR）。</li>
+<li>所有非DR/BDR只与DR/BDR建立邻居关系。</li>
+<li>非DR/BDR之间通过DR/BDR交换信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="划分区域"><a class="markdownIt-Anchor" href="#划分区域"></a> 划分区域</h4>
+<ul>
 <li>
-<p>由于各路由器之间频繁地交换链路状态信息，因此所有的路由器最终都能建立一个<strong>链路状态数据库</strong>。</p>
+<p>为了使OSPF协议能够用于规模大的网络，OSPF把一个自治系统AS再划分为若干个更小的范围——区域（area）。</p>
 </li>
 <li>
-<p>这个数据库实际上就是全网的拓扑结构图，它在全网范围内是一致的（这称为链路状态数据库的同步）。</p>
+<p>好处：<strong>把利用洪泛法交换链路状态信息的范围局限于每一个区域，这样就减少了整个网络上的通信量</strong>。</p>
 </li>
 <li>
-<p>OSPF 的链路状态数据库能较快地进行更新，使各个路由器能及时更新其路由表。</p>
+<p>采用划分区域的方法，虽然使交换信息的种类增多了，同时也使OSPF协议更加复杂了，但这样做能使每一个区域内部交换路由信息的通信量大大减小，因而使OSPF协议能够用于规模更大的自治系统AS。</p>
+</li>
+</ul>
+<h4 id="其它特点"><a class="markdownIt-Anchor" href="#其它特点"></a> 其它特点</h4>
+<ul>
+<li>OSPF不用UDP而是直接用IP数据报传送。</li>
+<li>OSPF构成的数据报很短，减少路由信息的通信量。</li>
+<li>OSPF可根据IP分组的不同服务类型TOS而设置成不同的代价，对于不同类型业务可计算出不同的路由。</li>
+<li>同一个目的网络有多条相同代价的路径，可将通信量分配给这几条路径，这叫做多路径间的负载平衡。</li>
+<li>所有在OSPF路由器之间交换的分组都具有鉴别的功能（可信赖的路由间交换信息）。</li>
+<li>支持可变长度的子网划分和无分类的编址</li>
+<li>每一个链路状态都带上一个 32 位的序号，序号越大状态就越新。</li>
+<li>OSPF还规定每隔一段时间（如30分钟），要刷新一次数据库中的链路状态。</li>
+<li><strong>由于一个路由器的链路状态只涉及到与相邻路由器的连通状态，因而与整个互联网的规模并无直接关系。因此当互联网规模很大时，OSPF协议要比距离向量协议RIP好得多</strong>。</li>
+<li>OSPF没有“坏消息传播得慢”的问题，据统计，其响应网络变化的时间小于100ms。</li>
+</ul>
+<h3 id="7-边界网关协议bgp"><a class="markdownIt-Anchor" href="#7-边界网关协议bgp"></a> 7、边界网关协议BGP</h3>
+<ul>
+<li>边界网关协议（Border Gateway Protocol，BGP）属于外部网关协议EGP这个类别，用于自治系统AS之间的路由选择协议。</li>
+<li>BGP力求寻找一条能够到达目的网络且<strong>比较好的路由（不能兜圈子）</strong>，而<strong>并非要寻找一条最佳路由</strong>。</li>
+<li>互联网的规模太大，对于自治系统之间的路由选择，要寻找最佳路由是很不现实的。
+<ul>
+<li>不同AS内度量路由的代价可能不同，对于AS之间的路由选择，使用统一的代价寻找最佳是不行的。</li>
+</ul>
+</li>
+<li>AS之间的路由选择还必须考虑有关策略（政治、经济、安全等）。</li>
+<li>在配置BGP时，每个AS的管理员要选择至少一个路由器作为该AS的“BGP发言人”。</li>
+<li>一般来说，两个BGP发言人都是通过一个共享网络连接在一起的，而<strong>BGP发言人往往就是BGP边界路由器</strong>。</li>
+<li>BGP发言人除了运行BGP协议外，还必须运行自己所在AS所使用的内部网关协议IGP，例如RIP或OSPF。</li>
+<li>BGP发言人之前交换路由信息，先<strong>建立TCP连接</strong>，在此连接上<strong>建立BGP会话</strong>，利用<strong>BGP会话交换路由信息</strong>。</li>
+<li>使用TCP连接能提供可靠的服务，也简化了路由选择协议。</li>
+<li>使用TCP连接交换路由信息的两个BGP发言人，彼此称为对方的邻站（neighbor）或对等站（peer）。</li>
+<li>BGP发言人交换网络可达性的信息：要到达某个网络所要经过的一系列自治系统。</li>
+<li>当BGP发言人相互交换了网络可达性的信息后，各BGP发言人就根据所采用的策略，<strong>从收到的路由信息中找出到达各自治系统的较好的路由</strong>，也就是<strong>构造出树形结构且不存在环路的自治系统连通图</strong>。</li>
+<li>BGP适用于多级结构的互联网。</li>
+<li>BGP协议交换路由信息的节点数量级是自治系统数的量级，这要比这些自治系统中的网络数少很多。</li>
+<li>每一个自治系统中BGP发言人（或边界路由器）的数目是很少的，使得自治系统之间的路由选择不过分复杂。</li>
+<li>BGP支持 CIDR，BGP路由表包括目的网络前缀、下一跳路由器，和到达该目的网络所要经过的自治系统序列。</li>
+<li>在BGP刚刚运行时，BGP的邻站是交换整个的BGP路由表。但以后只需要在发生变化时更新有变化的部分。这样做对节省网络带宽和减少路由器的处理开销都有好处。</li>
+</ul>
+<h4 id="路由"><a class="markdownIt-Anchor" href="#路由"></a> 路由</h4>
+<ul>
+<li>一个自治系统有两种不同的路由器：边界路由器和内部路由器。</li>
+<li>边界路由器R1和R2之间建立TCP连接，这种TCP又称为半永久性连接（eBGP连接），向对等端发送BGP路由。</li>
+<li><strong>在AS内部</strong>，路由器之间还需要建立TCP连接（iBGP连接），向内部的其他路由器传送BGP报文。
+<ul>
+<li>规定，AS内部所有的iBGP必须是<strong>全连通的</strong>。</li>
+<li>即使两个路由器之间没有物理连接，也有iBGP连接。</li>
+</ul>
+</li>
+<li>路由通告规则：
+<ul>
+<li>从eBGP对等端收到的BGP路由，通告给所有对等端 (iBGP/eBGP)。</li>
+<li>从iBGP对等端收到的BGP路由，可通过eBGP通告给不在同一AS的对等端。</li>
+<li>从iBGP对等端收到的BGP路由，不能通告给同一个AS内不同iBGP的对等端（<strong>水平分割原则</strong>）。</li>
+</ul>
+</li>
+<li>BGP协议用来解决在众多AS之间的路由选择问题。
+<ul>
+<li>eBGP连接用于在<strong>不同的AS之间交换路由信息</strong>。</li>
+<li>iBGP连接用于在<strong>AS内部交换路由信息</strong>。</li>
+</ul>
+</li>
+<li>每一个AS中，还<strong>必须运行内部网关协议IGP</strong>。<img src="/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/21.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>BGP路由的一般格式“X，AS，R”（从R出发，经过AS，就能到达X）</li>
+<li><strong>前缀</strong>：通告的BGP路由<strong>终点</strong>（子网前缀）。</li>
+<li><strong>BGP属性</strong>中最重要两个类型：AS-PATH 和 NEXT-HOP。
+<ul>
+<li>AS-PATH （自治系统路径）是通告的BGP路由所经过的自治系统。</li>
+<li>NEXT-HOP （下一跳）是通告的BGP路由起点。</li>
+</ul>
+</li>
+<li>路由器构造自己转发表：<strong>两次递归查找</strong>。</li>
+</ul>
+<img src="/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/22.png" srcset="/img/loading.gif" lazyload class="">
+<ul>
+<li>R4要把这条BGP路由的<strong>起点进行转换</strong>。
+<ul>
+<li>把BGP路由的起点改为R1的对等端R2 ，把BGP路由变为“R2→ R1→X”。</li>
+</ul>
+</li>
+<li>利用内部网关协议，找到从R4到R2的最佳路由中的下一跳。
+<ul>
+<li>本例中，假设查出下一跳是R3。于是R4在转发表中增加了到达前缀X的下一跳是R3这一项目。</li>
+</ul>
+</li>
+<li>用类似的方法，路由器R<sub>3</sub>也在自己的转发表中增加了到达前缀X的项目。</li>
+<li>路由器R<sub>4</sub>只要收到要到达前缀X的分组，都按照R<sub>4</sub>→R<sub>3</sub>→R<sub>2</sub>→R<sub>1</sub>→X的路径， 最后到达前缀X。</li>
+</ul>
+<h4 id="三种不同的自治系统as"><a class="markdownIt-Anchor" href="#三种不同的自治系统as"></a> 三种不同的自治系统AS</h4>
+<ul>
+<li>末梢AS（stub AS）：发送分组给<strong>直连的AS</strong>或<strong>从直连的AS</strong>接受分组或发送分组，不会把来自其他AS的分组再转发到另一个AS。
+<ul>
+<li>多归属AS：同时连接两个或以上的AS，增加链接的可靠性，不允许分组穿越自己的自治系统。</li>
+<li>末梢AS必须向所连接的AS付费才能发送或接收分组。</li>
+</ul>
+</li>
+<li>穿越AS（transit AS）：高速通信干线的主干AS，其任务就是<strong>为其他的AS有偿转发分组</strong>。</li>
+<li>对等AS（peering AS）：事先协商的两个AS，彼此之间的发送或接收分组<strong>不收费</strong>。</li>
+</ul>
+<h4 id="路由选择"><a class="markdownIt-Anchor" href="#路由选择"></a> 路由选择</h4>
+<ul>
+<li>若到前缀X有两条或更多的BGP路由可供选择，那么就应当根据以下的原则，按照给出的先后顺序，选择一条较好 的BGP路由。
+<ul>
+<li>本地偏好（local preference）值最高的路由。 根据政治或经济上的策略来设置。</li>
+<li>选择具有AS跳数最少的路由。（不一定是最佳路由）</li>
+<li>使用<strong>热土豆路由选择算法</strong>。
+<ul>
+<li>两条BGP路由本地偏好相同。</li>
+<li>两条BGP路由经过AS的跳数相同。</li>
+<li><strong>最少转发次数</strong>到达下一个AS。</li>
+</ul>
+</li>
+<li>选择路由器BGP<strong>标识符的数值最小</strong>的路由。
+<ul>
+<li>在BGP报文中，首部有一个4字节的BGP标识符字段（BGP ID）。</li>
+<li>具有多个接口的路由器的BGP ID就是该路由器中IP地址中数值最大的一个。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="报文"><a class="markdownIt-Anchor" href="#报文"></a> 报文</h4>
+<ul>
+<li>BGP共使用四种报文，<strong>四种BGP报文具有同样的首部</strong>。
+<ul>
+<li>打开报文（OPEN）：用来与相邻的另一个BGP发言人（对等端）建立关系。</li>
+<li>更新报文（UPDATE）：用来通告某一条路由的信息，以及列出要撤销的路由。</li>
+<li>保活报文（KEEPALIVE）：用来周期性地证实与对等端的连通性。</li>
+<li>通知报文（NOTIFICATION）：用来发送检测到的差错。</li>
+</ul>
+</li>
+<li><strong>BGP报文使用TCP报文的数据部分来传送的</strong>（TCP连接端口号179）。</li>
+</ul>
+<h3 id="8-rip-ospf和bgp三种路由协议的比较"><a class="markdownIt-Anchor" href="#8-rip-ospf和bgp三种路由协议的比较"></a> 8、RIP, OSPF和BGP三种路由协议的比较</h3>
+<img src="/2024/06/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/23.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="七-虚拟专用网和网络地址转换"><a class="markdownIt-Anchor" href="#七-虚拟专用网和网络地址转换"></a> 七、虚拟专用网和网络地址转换</h2>
+<h3 id="1-专用网"><a class="markdownIt-Anchor" href="#1-专用网"></a> 1、专用网</h3>
+<ul>
+<li>由于IP地址的紧缺，一个机构能够申请到的IP地址数往往远小于本机构所拥有的主机数。</li>
+<li>考虑到互联网并不很安全，<strong>一个机构内也并不需要把所有的主机接入到外部的互联网</strong>。
+<ul>
+<li>那么从原则上讲，对于这些仅在机构内部使用的计算机就可以<strong>由本机构自行分配其IP地址</strong>。</li>
+</ul>
+</li>
+<li>两种地址：
+<ul>
+<li>本地地址：仅在机构内部使用的IP地址，可以由本机构自行分配，而不需要向互联网的管理机构申请。</li>
+<li>全球地址：全球唯一的IP地址，必须向互联网的管理机构申请。</li>
+</ul>
+</li>
+<li><strong>专用地址只能用作本地地址而不能用作全球地址</strong>。</li>
+<li>专用地址仅在本机构内部使用。专用IP地址也叫做可重用地址（reusable address）。</li>
+<li>采用这样的专用IP地址的互连网络称为专用互联网或本地互联网，就叫做专用网。</li>
+</ul>
+<h3 id="2-虚拟专用网"><a class="markdownIt-Anchor" href="#2-虚拟专用网"></a> 2、虚拟专用网</h3>
+<ul>
+<li>虚拟专用网（Virtual Private Network，VPN）利用公用的互联网作为本机构各专用网之间的通信载体。</li>
+<li>如果专用网不同网点之间的通信必须经过互联网，又有保密要求，所有通过互联网传送的数据都必须加密。</li>
+<li>给专用网内各主机配置的IP地址应该是该专用网所在机构可以自行分配的<strong>专用地址</strong>，仅在机构内部有效。</li>
+<li>【RFC 1918】规定了以下三个CIDR地址块中的地址作为专用地址：
+<ul>
+<li>A类，或记为10.0.0.0/8，它又称为 24 位块：10.0.0.0 到 10.255.255.255‘</li>
+<li>B类，或记为172.16.0.0/12，它又称为 20 位块：172.16.0.0 到 172.31.255.255</li>
+<li>C类，或记为192.168.0.0/16，它又称为 16 位块：192.168.0.0 到 192.168.255.255</li>
+</ul>
+</li>
+<li>“虚拟”表示“好像是”，但实际上并不是，因为<strong>现在并没有真正使用通信专线</strong>，而VPN只是在效果 上和真正的专用网一样。</li>
+<li>IP数据报在因特网中可能要经过多个网络和路由器，但从逻辑上看，路由器R1和R2之间好像是一条直通的点对点链路，因此也被称为IP隧道技术。</li>
+<li>一个机构要构建自己的VPN就必须为它的每一个场所购买专门的硬件和软件，并进行配置，使每一个场所的VPN系统都知道其他场所的地址。
+<ul>
+<li>内联网（intranet）VPN：同一机构内不同部门的内部网络所构成的虚拟专用网VPN。</li>
+<li>外联网（extranet）VPN：一个机构和某些外部机构共同建立的虚拟专用网VPN。</li>
+<li>远程接入（remote access）VPN：在外地工作的员工需要访问公司内部的专用网时，只要在任何地点接入 因特网，运行驻留在员工PC中的VPN软件，在员工的PC和公司的主机之间建立VPN隧道，就可以访问专 用网中的资源。外地员工与公司通信的内容是保密的，员工们感到好像就是使用公司内部的本地网络。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-网络地址转换nat"><a class="markdownIt-Anchor" href="#3-网络地址转换nat"></a> 3、网络地址转换NAT</h3>
+<ul>
+<li>
+<p>在专用网上使用专用地址的主机如何与互联网上的主机通信（并不需要加密）？</p>
+<ul>
+<li>再申请一些全球IP地址，但这在很多情况下是不容易做到的。</li>
+<li>采用网络地址转换（Network Address Translation，NAT），这是目前使用得最多的方法。</li>
+</ul>
 </li>
 <li>
-<p>OSPF 的更新过程收敛得快是其重要优点。</p>
+<p>网络地址转换NAT技术于1994年被提出，用来缓解IPv4地址空间即将耗尽的问题。</p>
+<ul>
+<li>NAT能使<strong>大量使用内部专用地址的专用网络用户共享少量外部全球地址</strong>来访问因特网上的主机和资源。</li>
+<li>需要在专用网连接到互联网的<strong>路由器上安装NAT软件（NAT路由器）</strong>，至少有一个有效的外部全球IP地址。</li>
+<li>所有使用本地地址的主机在和外界通信时，都要在NAT路由器上将其<strong>本地地址转换成全球IP地址</strong>，才能和互联网连接。</li>
+</ul>
+</li>
+<li>
+<p>在内部主机与外部主机通信时，在NAT路由器上发生了两次地址转换：</p>
+<ul>
+<li>离开专用网时：替换源地址，将内部地址替换为全球地址；</li>
+<li>进入专用网时：替换目的地址，将全球地址替换为内部地址。</li>
+</ul>
+</li>
+<li>
+<p>通过NAT路由器的通信必须由专用网内的主机发起。</p>
+</li>
+<li>
+<p>专用网内部的主机不能充当服务器用，因为互联网上的客户无法请求专用网内的服务器提供服务。</p>
+</li>
+<li>
+<p>由于目前绝大多数基于TCP/IP协议栈的网络应用，都使用运输层的传输控制协议TCP或用户数据报协议UDP， 为了更加有效地利用NAT路由器中的全球IP地址，现在常将<strong>NAT转换和运输层端口号结合使用</strong>。</p>
+<ul>
+<li>可以使多个拥有本地地址的主机，共用一个NAT路由器上的全球IP地址，可同时和互联网上不同主机通信。</li>
+<li><strong>使用端口号的NAT叫做网络地址与端口号转换NAPT</strong> (Network Address and Port Translation)，而不使用端 口号的NAT就叫做传统的NAT (traditional NAT)。</li>
+<li>现在很多家用路由器将家中各种智能设备（手机、平板、笔记本电脑、台式电脑、物联网设备等）接入互 联网，这种路由器实际上就是一个NAPT路由器，但往往并不运行路由选择协议。</li>
+</ul>
+</li>
+<li>
+<p>NAPT把专用网内不同的源IP地址，都转换为同样的全球IP地址。但<strong>对源主机所采用的TCP端口号（不管相同或不同），则转换为不同的新的端口号</strong>。因此，当NAPT路由器收到从互联网发来的应答时，就可以<strong>从IP数据报的数据部分找出运输层的端口号</strong>，然后根据不同的目的端口号，从NAPT转换表中找到正确的目的主机。</p>
+</li>
+<li>
+<p>尽管NAT和NAPT的出现在很大程度上缓解了IPv4地址资源紧张的局面，但NAT和NAPT对网络应用并不完全透明，会对某些网络应用产生影响。</p>
+</li>
+<li>
+<p><strong>NAT和NAPT的一个重要特点就是通信必须由专用网内部发起</strong>，因此拥有内部专用地址的主机不能直接充当因特网中的服务器。</p>
+</li>
+<li>
+<p>对于目前P2P这类需要外网主机主动与内网主机进行通信的网络应用，在通过NAT时会遇到问题，需要网络应用自身使用一些特殊的NAT穿透技术来解决。</p>
 </li>
 </ul>
 
