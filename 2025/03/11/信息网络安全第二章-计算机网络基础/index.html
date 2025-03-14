@@ -16,34 +16,34 @@
   <meta name="author" content="竹合安木">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、安全威胁  1、基本概念   2、安全威胁的来源   基本威胁：信息泄露、完整性破坏、拒绝服务、非法使用。   主要的可实现威胁：  渗入威胁：假冒、旁路控制、授权侵犯。 植入威胁：特洛伊木马、陷门。    潜在威胁：网络窃听、流量分析、操作不慎、废弃物。   典型威胁及其相互关系     二、网络安全策略  1、基本概念   2、授权 授权是安全策略的一个基本组成部分，它指主体（用户、终端">
+    <meta name="description" content="一、计算机网络的定义 将处于不同位置并具有独立功能的多个计算机系统通过通信线路和网络设备连接起来，以实现网络资源共享，此系统称为计算机网络。  二、计算机网络体系结构  1、网络体系结构的定义   计算机网络的各层定义及其协议集合，称为网络体系结构。   实现方式不属于网络体系结构。   网络协议的特点  为进行网络中的数据交换而建立的规则、标准或约定 含有时序 两个及两个以上的通信实体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息网络安全第一章 引言">
-<meta property="og:url" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/index.html">
+<meta property="og:title" content="信息网络安全第二章 计算机网络基础">
+<meta property="og:url" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="竹合安木的博客">
-<meta property="og:description" content="一、安全威胁  1、基本概念   2、安全威胁的来源   基本威胁：信息泄露、完整性破坏、拒绝服务、非法使用。   主要的可实现威胁：  渗入威胁：假冒、旁路控制、授权侵犯。 植入威胁：特洛伊木马、陷门。    潜在威胁：网络窃听、流量分析、操作不慎、废弃物。   典型威胁及其相互关系     二、网络安全策略  1、基本概念   2、授权 授权是安全策略的一个基本组成部分，它指主体（用户、终端">
+<meta property="og:description" content="一、计算机网络的定义 将处于不同位置并具有独立功能的多个计算机系统通过通信线路和网络设备连接起来，以实现网络资源共享，此系统称为计算机网络。  二、计算机网络体系结构  1、网络体系结构的定义   计算机网络的各层定义及其协议集合，称为网络体系结构。   实现方式不属于网络体系结构。   网络协议的特点  为进行网络中的数据交换而建立的规则、标准或约定 含有时序 两个及两个以上的通信实体">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/1.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/2.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/3.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/4.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/5.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/6.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/7.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/8.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/9.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/10.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/11.png">
-<meta property="article:published_time" content="2025-03-08T07:35:14.000Z">
-<meta property="article:modified_time" content="2025-03-09T07:48:30.715Z">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/1.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/2.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/4.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/3.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/5.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/6.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/7.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/8.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/9.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/10.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/11.png">
+<meta property="article:published_time" content="2025-03-11T11:41:53.000Z">
+<meta property="article:modified_time" content="2025-03-14T13:45:18.932Z">
 <meta property="article:author" content="竹合安木">
 <meta property="article:tag" content="网络安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wyz10006.github.io/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/1.png">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/1.png">
   
   
   
-  <title>信息网络安全第一章 引言 - 竹合安木的博客</title>
+  <title>信息网络安全第二章 计算机网络基础 - 竹合安木的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="信息网络安全第一章 引言"></span>
+            <span id="subtitle" data-typed-text="信息网络安全第二章 计算机网络基础"></span>
           
         </div>
 
@@ -253,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-08 15:35" pubdate>
-          2025年3月8日 下午
+        <time datetime="2025-03-11 19:41" pubdate>
+          2025年3月11日 晚上
         </time>
       </span>
     
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          392 字
+          1.1k 字
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          4 分钟
+          10 分钟
         
       </span>
     
@@ -321,63 +321,127 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">信息网络安全第一章 引言</h1>
+            <h1 id="seo-header">信息网络安全第二章 计算机网络基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="一-安全威胁"><a class="markdownIt-Anchor" href="#一-安全威胁"></a> 一、安全威胁</h2>
-<h3 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1、基本概念</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/1.png" srcset="/img/loading.gif" lazyload class="">
-<h3 id="2-安全威胁的来源"><a class="markdownIt-Anchor" href="#2-安全威胁的来源"></a> 2、安全威胁的来源</h3>
+                <h2 id="一-计算机网络的定义"><a class="markdownIt-Anchor" href="#一-计算机网络的定义"></a> 一、计算机网络的定义</h2>
+<p>将处于不同位置并具有独立功能的多个计算机系统通过<strong>通信线路</strong>和<strong>网络设备</strong>连接起来，以实现网络<strong>资源共享</strong>，此系统称为<strong>计算机网络</strong>。</p>
+<h2 id="二-计算机网络体系结构"><a class="markdownIt-Anchor" href="#二-计算机网络体系结构"></a> 二、计算机网络体系结构</h2>
+<h3 id="1-网络体系结构的定义"><a class="markdownIt-Anchor" href="#1-网络体系结构的定义"></a> 1、网络体系结构的定义</h3>
 <ul>
 <li>
-<p><strong>基本威胁</strong>：信息泄露、完整性破坏、拒绝服务、非法使用。</p>
+<p>计算机网络的各层定义及其协议集合，称为网络体系结构。</p>
 </li>
 <li>
-<p>主要的可实现威胁：</p>
+<p>实现方式不属于网络体系结构。</p>
+</li>
+<li>
+<p>网络协议的特点</p>
 <ul>
-<li>渗入威胁：假冒、旁路控制、授权侵犯。</li>
-<li>植入威胁：特洛伊木马、陷门。</li>
+<li>为进行网络中的数据交换而建立的规则、标准或约定</li>
+<li>含有时序</li>
+<li>两个及两个以上的通信实体</li>
 </ul>
 </li>
 <li>
-<p>潜在威胁：网络窃听、流量分析、操作不慎、废弃物。</p>
+<p>网络协议三要素：语法、语义、同步。</p>
+</li>
+</ul>
+<h3 id="2-两种典型的网络体系结构"><a class="markdownIt-Anchor" href="#2-两种典型的网络体系结构"></a> 2、两种典型的网络体系结构</h3>
+<ul>
+<li>
+<p>OSI参考模型和TCP/IP参考模型</p>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/1.png" srcset="/img/loading.gif" lazyload class="">
 </li>
 <li>
-<p>典型威胁及其相互关系</p>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/2.png" srcset="/img/loading.gif" lazyload class="">
+<p>高层协议、低层协议的概念</p>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/2.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>常见的三种计算机网络体系结构的相同点</p>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/4.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>两种参考模型的不同点</p>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/3.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>OSI参考模型中低层协议在网络层、数据链路层、物理层，中间节点是通信子网。低三层面向通信，可用软硬件实现；高三层面向信息处理，一般由软件实现；传输层联系上下层。</p>
 </li>
 </ul>
-<h2 id="二-网络安全策略"><a class="markdownIt-Anchor" href="#二-网络安全策略"></a> 二、网络安全策略</h2>
-<h3 id="1-基本概念-2"><a class="markdownIt-Anchor" href="#1-基本概念-2"></a> 1、基本概念</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/3.png" srcset="/img/loading.gif" lazyload class="">
-<h3 id="2-授权"><a class="markdownIt-Anchor" href="#2-授权"></a> 2、授权</h3>
-<p>授权是安全策略的一个基本组成部分，它指主体（用户、终端、程序等）对客体（数据、程序等）的支配权利，它规定了谁可以对什么做些什么。</p>
-<h3 id="3-访问控制策略"><a class="markdownIt-Anchor" href="#3-访问控制策略"></a> 3、访问控制策略</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/4.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/5.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/6.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/7.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/8.png" srcset="/img/loading.gif" lazyload class="">
-<h2 id="三-网络攻击"><a class="markdownIt-Anchor" href="#三-网络攻击"></a> 三、网络攻击</h2>
-<h3 id="1-攻击类型"><a class="markdownIt-Anchor" href="#1-攻击类型"></a> 1、攻击类型</h3>
+<h3 id="3-网络协议及协议封装以5层参考模型为例"><a class="markdownIt-Anchor" href="#3-网络协议及协议封装以5层参考模型为例"></a> 3、网络协议及协议封装——以5层参考模型为例</h3>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/5.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/6.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/7.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/8.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/9.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="4-tcpip四层参考模型"><a class="markdownIt-Anchor" href="#4-tcpip四层参考模型"></a> 4、TCP/IP四层参考模型</h3>
 <ul>
-<li>被动攻击：信息泄露、流量分析。</li>
-<li>主动攻击：伪装攻击、重放攻击、消息篡改、拒绝服务。</li>
+<li>TCP/IP是四层的体系结构：应用层、传输层、网络层和网络接口层。</li>
+<li>网络接口层可以包括多种通信网。</li>
+<li>IP协议支持多种网络技术互联以形成一个逻辑网络，提供了主机到主机的端到端通道。</li>
+<li>TCP、UDP提供了应用进程到应用进程的端到端传输通道。</li>
 </ul>
-<h3 id="2-网络攻击的八种形式"><a class="markdownIt-Anchor" href="#2-网络攻击的八种形式"></a> 2、网络攻击的八种形式</h3>
-<p>口令窃取、欺骗攻击、缺陷和后门攻击、认证失效、协议缺陷、信息泄露、指数攻击、拒绝服务攻击。</p>
-<p>指数攻击是能够使用程序快速复制并传播病毒的攻击。当程序自行传播时，这些程序称为蠕虫；当它们依附于其他程序传播时，这些程序叫病毒。</p>
-<h2 id="四-安全服务和安全机制"><a class="markdownIt-Anchor" href="#四-安全服务和安全机制"></a> 四、安全服务和安全机制</h2>
-<h3 id="1-x800定义的5类安全服务"><a class="markdownIt-Anchor" href="#1-x800定义的5类安全服务"></a> 1、X.800定义的5类安全服务</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/9.png" srcset="/img/loading.gif" lazyload class="">
-<p>口诀：<strong>认访保完不可赖</strong>。</p>
-<h3 id="2-x800定义的8种特定的安全机制"><a class="markdownIt-Anchor" href="#2-x800定义的8种特定的安全机制"></a> 2、X.800定义的8种特定的安全机制</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/10.png" srcset="/img/loading.gif" lazyload class="">
-<p>口诀：<strong>加签访整，认流路公</strong>。</p>
-<h3 id="3-安全服务与安全机制的关系"><a class="markdownIt-Anchor" href="#3-安全服务与安全机制的关系"></a> 3、安全服务与安全机制的关系</h3>
-<img src="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/11.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/10.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="三-分组交换技术"><a class="markdownIt-Anchor" href="#三-分组交换技术"></a> 三、分组交换技术</h2>
+<h3 id="1-分组交换技术的概念"><a class="markdownIt-Anchor" href="#1-分组交换技术的概念"></a> 1、分组交换技术的概念</h3>
+<ul>
+<li>分组交换技术(Packet switching technology)也称包交换技术，它将用户传送的数据划分成一定长度的分组，通过传输分组的方式传输信息。</li>
+<li>每个分组的前面有一个分组头，用以指明该分组发往的目标地址。</li>
+<li>由交换机根据每个分组的目标地址，将它们转发至目的地，这一过程称为分组交换。</li>
+</ul>
+<h3 id="2-分组交换技术的特点"><a class="markdownIt-Anchor" href="#2-分组交换技术的特点"></a> 2、分组交换技术的特点</h3>
+<ul>
+<li>先将数据分组</li>
+<li>再将分组通过路由器/交换机发送</li>
+</ul>
+<h2 id="四-internet基本知识"><a class="markdownIt-Anchor" href="#四-internet基本知识"></a> 四、Internet基本知识</h2>
+<h3 id="1-ipv4地址简介"><a class="markdownIt-Anchor" href="#1-ipv4地址简介"></a> 1、IPv4地址简介</h3>
+<h4 id="ip地址组成及记法"><a class="markdownIt-Anchor" href="#ip地址组成及记法"></a> IP地址组成及记法</h4>
+<ul>
+<li>每一类地址都由两个固定长度的字段组成：
+<ul>
+<li>网络标识 net-id：标志某台主机（或路由器）所连接到的网络；</li>
+<li>主机标识 host-id：标志某台主机或某台路由器。</li>
+</ul>
+</li>
+<li>两级的IP地址可以记为：IP = {&lt; net-id&gt; &lt; host-id&gt;}</li>
+<li>点分十进制表示法：每8 bit的二进制数转换为十进制数。</li>
+</ul>
+<h4 id="ip地址的分类"><a class="markdownIt-Anchor" href="#ip地址的分类"></a> IP地址的分类</h4>
+<img src="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/11.png" srcset="/img/loading.gif" lazyload class="">
+<ul>
+<li>网络地址：在IP地址中当<strong>主机号为全0</strong>时，用来指明某个特定的网络，它永远不会出现在目的地址中。</li>
+<li>广播地址：在IP地址中当<strong>主机地址为全1、网络号不为0</strong>时，表示一个物理网络上的所有主机。它不会出现在源地址中，只能作为目的地址。在这种情况下，发送的数据包将到达一个特定网络的所有计算机。</li>
+</ul>
+<h4 id="子网掩码"><a class="markdownIt-Anchor" href="#子网掩码"></a> 子网掩码</h4>
+<ul>
+<li>
+<p>在TCP/IP协议中，子网掩码的作用是用来区分网络上的主机是否在同一网络取段内。</p>
+</li>
+<li>
+<p>网络地址=（IP地址）AND（子网掩码）</p>
+</li>
+<li>
+<p>CIDR（无分类编址）地址表示：IP地址/net-id位数。</p>
+</li>
+</ul>
+<h4 id="ip地址与mac地址"><a class="markdownIt-Anchor" href="#ip地址与mac地址"></a> IP地址与MAC地址</h4>
+<p>在网络交换机上建立MAC地址和IP地址映射表，由ARP协议实现MAC地址（48b）与IPv4地址（32b）之间的自动转换。</p>
+<h3 id="2-ipv6地址及表示方法"><a class="markdownIt-Anchor" href="#2-ipv6地址及表示方法"></a> 2、IPv6地址及表示方法</h3>
+<ul>
+<li>冒号分十六进制表示法：将128b地址分为8组，每组使用4个十六进制数字表示，用冒号隔开。</li>
+<li>压缩形式表示法：将多个具有0值的连续片段替换成双冒号（“ :: ”），双冒号（“ :: ”）只在IPv6地址中出现一次。</li>
+</ul>
+<h3 id="3-端口的概念"><a class="markdownIt-Anchor" href="#3-端口的概念"></a> 3、端口的概念</h3>
+<ul>
+<li>端口是用来标志进程的“端口”，就是协议端口号。</li>
+<li>端口号的主要作用是表示一台计算机中的<strong>特定进程所提供的服务</strong>。通过端口号来区别相同计算机所提供的这些不同的服务。</li>
+<li>端口号只有整数，范围是从0到65535。</li>
+<li>通常小于1024的端口为特权端口。</li>
+</ul>
 
                 
               </div>
@@ -423,8 +487,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>信息网络安全第一章 引言</div>
-      <div>https://wyz10006.github.io/2025/03/08/信息网络安全第一章-引言/</div>
+      <div>信息网络安全第二章 计算机网络基础</div>
+      <div>https://wyz10006.github.io/2025/03/11/信息网络安全第二章-计算机网络基础/</div>
     </div>
     <div class="license-meta">
       
@@ -436,7 +500,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月8日</div>
+          <div>2025年3月11日</div>
         </div>
       
       
@@ -468,18 +532,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="信息网络安全第二章 计算机网络基础">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">信息网络安全第二章 计算机网络基础</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/09/SM2%E7%9A%84%E5%80%8D%E7%82%B9%E8%BF%90%E7%AE%97%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0/" title="SM2的倍点运算快速实现">
-                        <span class="hidden-mobile">SM2的倍点运算快速实现</span>
+                      <a href="/2025/03/08/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%A8%80/" title="信息网络安全第一章 引言">
+                        <span class="hidden-mobile">信息网络安全第一章 引言</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
