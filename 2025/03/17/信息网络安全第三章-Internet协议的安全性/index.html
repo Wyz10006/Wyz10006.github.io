@@ -1,0 +1,1080 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/%E5%A4%B4%E5%83%8F.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="竹合安木">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、网际层协议  1、IP协议   IP协议也称网际互连协议（Internet Protocol），它是TCP&#x2F;IP协议族的核心，也是网际层最重要的协议。它主要负责数据包的传输和路由的选择。      IP协议的主要特点：  无连接：各个数据报独立传输，可能沿着不同的路径到达目的地，也可能不会按序到达目的地。 不可靠：不含错误检测或错误恢复的编码。 点对点：进行数据传输时的对等实体一定是相邻设备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息网络安全第三章 Internet协议的安全性">
+<meta property="og:url" content="https://wyz10006.github.io/2025/03/17/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%89%E7%AB%A0-Internet%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/index.html">
+<meta property="og:site_name" content="竹合安木的博客">
+<meta property="og:description" content="一、网际层协议  1、IP协议   IP协议也称网际互连协议（Internet Protocol），它是TCP&#x2F;IP协议族的核心，也是网际层最重要的协议。它主要负责数据包的传输和路由的选择。      IP协议的主要特点：  无连接：各个数据报独立传输，可能沿着不同的路径到达目的地，也可能不会按序到达目的地。 不可靠：不含错误检测或错误恢复的编码。 点对点：进行数据传输时的对等实体一定是相邻设备">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/17/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%89%E7%AB%A0-Internet%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/0.png">
+<meta property="article:published_time" content="2025-03-17T11:00:28.000Z">
+<meta property="article:modified_time" content="2025-03-18T13:42:30.310Z">
+<meta property="article:author" content="竹合安木">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/03/17/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%89%E7%AB%A0-Internet%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/0.png">
+  
+  
+  
+  <title>信息网络安全第三章 Internet协议的安全性 - 竹合安木的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/meihua.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wyz10006.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","app_key":"3LOGiBjL7YN8wgXZXHDkhDZD","server_url":"https://tge3h6ei.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>竹合安木的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/none.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息网络安全第三章 Internet协议的安全性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-17 19:00" pubdate>
+          2025年3月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信息网络安全第三章 Internet协议的安全性</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-网际层协议"><a class="markdownIt-Anchor" href="#一-网际层协议"></a> 一、网际层协议</h2>
+<h3 id="1-ip协议"><a class="markdownIt-Anchor" href="#1-ip协议"></a> 1、IP协议</h3>
+<ul>
+<li>
+<p>IP协议也称<strong>网际互连协议</strong>（Internet Protocol），它是TCP/IP协议族的核心，也是网际层最重要的协议。它主要负责<strong>数据包的传输</strong>和<strong>路由的选择</strong>。</p>
+</li>
+<li>
+<img src="/2025/03/17/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%89%E7%AB%A0-Internet%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/0.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>IP协议的主要特点：</p>
+<ul>
+<li>无连接：各个数据报独立传输，可能沿着不同的路径到达目的地，也可能不会按序到达目的地。</li>
+<li>不可靠：不含错误检测或错误恢复的编码。</li>
+<li>点对点：进行数据传输时的对等实体一定是相邻设备或同一网络中的对等实体。</li>
+<li>效率高：采用了尽力传输的思想。</li>
+<li>无状态：通信双方不同步传输数据的状态信息，无法处理乱序和重复的IP数据包。</li>
+</ul>
+</li>
+<li>
+<p>IP协议的主要功能：</p>
+<ul>
+<li>分配IP地址：IP协议为每个连接到互联网上的设备分配一个唯一的IP地址。</li>
+<li>路由选择：IP协议根据路由表选择最佳的路径将数据包传输到目的地。</li>
+<li>分组传输：IP协议将数据分成若干个数据报进行传输，每个数据包都有自己的目的地址和源地址。</li>
+<li>分片和重组：IP协议可以将大的数据包进行分片，传输到接收方后再进行重组。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-arp协议"><a class="markdownIt-Anchor" href="#2-arp协议"></a> 2、ARP协议</h3>
+<ul>
+<li>地址解析协议（Address Resolution Protocol）是根据IP地址获取物理地址的一个TCP/IP协议。</li>
+<li>安全问题：ARP欺骗攻击；<br />
+防护措施：在交换机上配置IEEE 802.1x协议，攻击者连接交换机时需进行身份认证；或者建立静态ARP表。</li>
+</ul>
+<h3 id="3-icmp协议"><a class="markdownIt-Anchor" href="#3-icmp协议"></a> 3、ICMP协议</h3>
+<ul>
+<li>控制报文协议（Internet Control Message Protocol）是一个重要的错误处理和信息处理协议。
+<ul>
+<li>用于通知主机到达目的地的最佳路由，报告路由故障；</li>
+<li>是两个非常重要的监控工具——Ping和Tracert的重要组成部分；</li>
+<li>它是一种差错和控制报文协议，不仅用于传输差错报文，还传输控制报文。</li>
+</ul>
+</li>
+<li>安全问题：ICMP重定向攻击
+<ul>
+<li>攻击者可利用ICMP对消息重定向，使目标机遭受连接劫持和拒绝服务攻击。</li>
+<li>重定向消息应该仅由产生消息的主机或路由器执行，网管员不应使用ICMP创建通往目的地的新路由。</li>
+</ul>
+</li>
+<li>安全问题：ICMP路由器发现攻击
+<ul>
+<li>在进行路由发现时，ICMP并不对应答方进行认证，使它可能遭受中间人攻击。</li>
+</ul>
+</li>
+<li>安全问题：防火墙穿越攻击
+<ul>
+<li>通过防火墙穿越攻击技术，攻击者能够穿越某个防火墙的访问控制列表和规则集，进而确定该防火墙过滤的内容和具体的过滤方式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-igmp协议"><a class="markdownIt-Anchor" href="#4-igmp协议"></a> 4、IGMP协议</h3>
+<ul>
+<li>组管理协议（Internet Group Management Protocol）是TCP/IP协议族中负责IP组播成员管理的协议。
+<ul>
+<li>主机通过IGMP通知路由器希望接收或离开某个特定组播组的信息。</li>
+<li>路由器通过IGMP周期性地查询局域网内的组播组成员是否处于活动状态，实现所连网段组成员关系的收集与维护。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-ospf协议"><a class="markdownIt-Anchor" href="#5-ospf协议"></a> 5、OSPF协议</h3>
+<ul>
+<li>
+<p>开放最短路径优先协议（Open Shortest Path First）是一个内部网关协议，用于在单一自治系统内实施路由决策。</p>
+</li>
+<li>
+<p>OSPF路由协议是一种典型的链路状态的路由协议，一般用于同一个路由域内，属于分布式的链路状态路由协议。</p>
+</li>
+<li>
+<p>每个OSPF路由器都有一个保存全网链路信息的链路状态数据库。OSPF路由器正是通过这个数据库计算出其OSPF路由表。</p>
+</li>
+<li>
+<p>OSPF协议中规定了认证域，但其作用非常有限。</p>
+</li>
+</ul>
+<h3 id="6-bgp协议"><a class="markdownIt-Anchor" href="#6-bgp协议"></a> 6、BGP协议</h3>
+<ul>
+<li>边界网关协议（Border Gateway Protocol）将单一管理的网络转化为由多个自治系统分散互连的网络。</li>
+<li>安全问题：BGP缺乏一个安全可信的路由认证机制，无法对所传播的路由信息的安全性进行验证。</li>
+</ul>
+<h2 id="二-传输层协议"><a class="markdownIt-Anchor" href="#二-传输层协议"></a> 二、传输层协议</h2>
+<h3 id="1-tcp协议"><a class="markdownIt-Anchor" href="#1-tcp协议"></a> 1、TCP协议</h3>
+<ul>
+<li>传输控制协议（Transmission Control Protocol），是一种面向连接的、可靠的传输层通信协议。</li>
+<li>第一类攻击：攻击前，针对TCP连接建立阶段的三次握手过程的SYN FLOOD攻击。攻击者不断向服务器的监听接口发送建立TCP连接的请求SYN数据包，使服务器一直处于半开放连接状态，无法接受其他正常的连接请求。属于拒绝服务攻击。</li>
+<li>第二类攻击：针对TCP协议不对数据包加密和认证的漏洞的TCP会话劫持攻击。</li>
+<li>第三类攻击：针对TCP协议的拥塞控制机制的特性，在连接建立后的数据传输阶段发起攻击。</li>
+</ul>
+<h3 id="2-udp协议"><a class="markdownIt-Anchor" href="#2-udp协议"></a> 2、UDP协议</h3>
+<ul>
+<li>用户数据包协议（User Datagram Protocol）是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</li>
+<li>安全问题：最常见的UDP攻击为Dos攻击，而UDP FLOOD攻击又是Dos攻击中最普遍的流量型攻击。攻击源发送大量的UDP小包到攻击目标，目标可以是服务器或网络设备，使其忙于处理和回应UDP报文，系统资源使用率高，最后导致设备不能提供正常服务或死机。</li>
+</ul>
+<h2 id="三-应用层协议"><a class="markdownIt-Anchor" href="#三-应用层协议"></a> 三、应用层协议</h2>
+<h3 id="1-rip协议端口udp-520"><a class="markdownIt-Anchor" href="#1-rip协议端口udp-520"></a> 1、RIP协议（端口：UDP 520）</h3>
+<ul>
+<li>动态路由选择协议（Routing Information Protocol）是一种动态内部路由/网关协议，用于自治系统内的路由信息的传递。</li>
+<li>安全问题：攻击者可以伪造RIP路由更新信息；利用网络嗅探工具来获得远程网络的RIP路由表，通过欺骗工具伪造RIP报文，再利用重定向工具截取、修改和重写向外发送的报文。</li>
+</ul>
+<h3 id="2-http协议端口tcp-80"><a class="markdownIt-Anchor" href="#2-http协议端口tcp-80"></a> 2、HTTP协议（端口：TCP 80）</h3>
+<ul>
+<li>超文本传输协议（Hyper Text Transfer Protocol）是一种应用层协议，它规定了客户端和服务器端之间请求和应答的标准，也是互联网上应用最广泛的网络协议。</li>
+<li>HTTP协议中数据是直接通过明文进行传输的，不提供数据加密，因此存在较大的安全缺陷。</li>
+</ul>
+<h3 id="3-telnet协议端口tcp-23"><a class="markdownIt-Anchor" href="#3-telnet协议端口tcp-23"></a> 3、TElNET协议（端口：TCP 23）</h3>
+<ul>
+<li>远程登录协议（Teletype Network）是在Internet上实现远程登录服务的标准协议和主要方式。</li>
+<li>TElNET提供了简单终端到某台主机的访问，攻击者可以通过Sniffer记录用户名和口令组合，或者记录整个会话。</li>
+</ul>
+<h3 id="4-ssh协议端口tcp-22"><a class="markdownIt-Anchor" href="#4-ssh协议端口tcp-22"></a> 4、SSH协议（端口TCP 22）</h3>
+<ul>
+<li>安全壳协议（Secure Shell）是一种在不安全的网络上建立安全的远程登录网络服务的协议，支持身份认证和数据加密。</li>
+<li>SSH协议服务器的主机密钥存储在一个主机密钥文件中。</li>
+</ul>
+<h3 id="5-dns协议端口udp-53"><a class="markdownIt-Anchor" href="#5-dns协议端口udp-53"></a> 5、DNS协议（端口UDP 53）</h3>
+<ul>
+<li>域名系统（Domain Name System）是一个分布式数据库系统，用来实现域名与IP地址之间的映射。1个为主根服务器，放置在美国，其余12个均为辅根服务器，其中9个在美国，欧洲2个，位于英国和瑞典，亚洲1个，位于日本。</li>
+<li>DNS欺骗攻击：攻击者假冒域名服务器的一种欺骗行为。</li>
+<li>DNS缓存中毒攻击：攻击者给DNS服务器注入非法网络域名地址。</li>
+<li>DNS重定向攻击：攻击者将DNS名称查询重定向到恶意DNS服务器上。</li>
+</ul>
+<h3 id="6-smtp协议端口tcp-25"><a class="markdownIt-Anchor" href="#6-smtp协议端口tcp-25"></a> 6、SMTP协议（端口：TCP 25）</h3>
+<ul>
+<li>简单邮件传输协议（Simple Mail Transfer Protocol）是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。</li>
+<li>SMTP自身是完全无害的，但它可能成为拒绝服务攻击的发源地。</li>
+</ul>
+<h3 id="7-mime协议"><a class="markdownIt-Anchor" href="#7-mime协议"></a> 7、MIME协议</h3>
+<ul>
+<li>多用途网间邮件扩充协议（Multipurpose Internet E-mail Extention）是一种广泛应用的电子邮件技术规范。</li>
+<li>对MIME存在一种分段攻击。</li>
+<li>邮递可执行程序或邮件含有危险的PostScript文件，是传播蠕虫和病毒的主要途径。</li>
+</ul>
+<h3 id="8-pop3协议端口tcp-110"><a class="markdownIt-Anchor" href="#8-pop3协议端口tcp-110"></a> 8、POP3协议（端口：TCP 110）</h3>
+<ul>
+<li>邮局协议（Post Office Protocol）是一个邮件协议，它的第3个版本称为POP3。</li>
+<li>POP3口令以明文传输，存储在服务器上。</li>
+</ul>
+<h3 id="9-imap4协议端口tcp-143993"><a class="markdownIt-Anchor" href="#9-imap4协议端口tcp-143993"></a> 9、IMAP4协议（端口：TCP 143,993）</h3>
+<ul>
+<li>消息访问协议（Internet Message Access Protocol）是一个邮件接收协议。</li>
+<li>IMAP4与POP3一样，是收邮件协议。</li>
+</ul>
+<h3 id="10-pgp协议"><a class="markdownIt-Anchor" href="#10-pgp协议"></a> 10、PGP协议</h3>
+<ul>
+<li>PGP（Pretty Good Privacy）协议是常用的安全电子邮件标准。PGP包括5种服务：认证、加密、压缩、电子邮件兼容和分段。</li>
+</ul>
+<h3 id="11-ftp协议端口tcp-2021"><a class="markdownIt-Anchor" href="#11-ftp协议端口tcp-2021"></a> 11、FTP协议（端口：TCP 20/21）</h3>
+<ul>
+<li>文件传输协议（File Transfer Protocol）是Internet文件传送的基础，是TCP/IP协议族的重要协议之一。
+<ul>
+<li>控制连接：在整个会话期间一直保持打开，客户发送的传送请求通过控制连接发送给服务器端的控制进程。</li>
+<li>数据连接：用于传输文件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-tftp协议端口udp-69"><a class="markdownIt-Anchor" href="#12-tftp协议端口udp-69"></a> 12、TFTP协议（端口：UDP 69）</h3>
+<ul>
+<li>简单文件传输协议（Trivial File Transfer Protocol）是用来在客户机与服务器之间进行简单文件传输的协议。</li>
+<li>TFTP用于提供简单、开销较小的文件传输服务，利用UDP协议，提供不可靠的数据流传输服务。</li>
+</ul>
+<h3 id="13-nfs协议端口udp-2049"><a class="markdownIt-Anchor" href="#13-nfs协议端口udp-2049"></a> 13、NFS协议（端口：UDP 2049）</h3>
+<ul>
+<li>网络文件系统（Network File System）是一个基于TCP/IP网络的文件共享协议。</li>
+<li>NFS允许一个系统在网络上与他人共享目录和文件。</li>
+</ul>
+<h3 id="14-snmp协议端口udp-161162"><a class="markdownIt-Anchor" href="#14-snmp协议端口udp-161162"></a> 14、SNMP协议（端口：UDP 161/162）</h3>
+<ul>
+<li>简单网络管理协议（Simple Network Management Protocol）是用于支持网络管理系统的协议。</li>
+<li>广泛应用于多种类的网络设备、软件和系统中，被认为是首选管理协议。</li>
+<li>控制路由器、网桥及其其他网元，用来读/写各种设备信息，如操作系统版本、路由表、接口名称和ARP映射表等。</li>
+</ul>
+<h3 id="15-dhcp协议端口udp-6768"><a class="markdownIt-Anchor" href="#15-dhcp协议端口udp-6768"></a> 15、DHCP协议（端口：UDP 67/68）</h3>
+<ul>
+<li>动态主机配置协议（Dynamic Host Configuration Protocol）用于分配IP地址、提供启动计算机其他信息的协议。</li>
+<li>出于安全性的考虑，此协议只能在本地网络上使用。</li>
+</ul>
+<h3 id="16-h323协议"><a class="markdownIt-Anchor" href="#16-h323协议"></a> 16、H.323协议</h3>
+<ul>
+<li>H.323是一种用于VoIP（Voice over IP）在分组网上提供实时音频、视频和数据通信的标准。</li>
+</ul>
+<h3 id="17-sip协议"><a class="markdownIt-Anchor" href="#17-sip协议"></a> 17、SIP协议</h3>
+<ul>
+<li>会话启动协议（Session Initiation Protocol）是由IETF制定的基于文本编码的多媒体通信协议。</li>
+</ul>
+<h3 id="18-ntp协议端口udp-123"><a class="markdownIt-Anchor" href="#18-ntp协议端口udp-123"></a> 18、NTP协议（端口：UDP 123）</h3>
+<ul>
+<li>网络时间协议（Network Time Protocol）可在分布式时间服务器和客户端之间进行时间同步。</li>
+</ul>
+<h3 id="19-finger协议端口udp-79"><a class="markdownIt-Anchor" href="#19-finger协议端口udp-79"></a> 19、FINGER协议（端口：UDP 79）</h3>
+<ul>
+<li>Finger协议可以帮助用户查询系统中某一个用户的细节，如其全名、住址、电话号码、登录细节等。</li>
+</ul>
+<h3 id="20-whois协议端口tcp-43"><a class="markdownIt-Anchor" href="#20-whois协议端口tcp-43"></a> 20、Whois协议（端口：TCP 43）</h3>
+<ul>
+<li>Whois协议是用来查询域名的IP以及所有者等信息的传输协议。</li>
+</ul>
+<h3 id="21-ldap协议端口tcp-389"><a class="markdownIt-Anchor" href="#21-ldap协议端口tcp-389"></a> 21、LDAP协议（端口：TCP 389）</h3>
+<ul>
+<li>轻量级目录访问协议（Lightweight Directory Access Protocol）是基于X.500的目录访问协议，以目录的形式来管理资源。</li>
+<li>用于数字证书的存取。</li>
+</ul>
+<h3 id="22-nntp协议端口tcp-119"><a class="markdownIt-Anchor" href="#22-nntp协议端口tcp-119"></a> 22、NNTP协议（端口：TCP 119）</h3>
+<ul>
+<li>网络新闻传输协议（Network News Transfer Protocol）主要用于阅读和张贴新闻文章到Usenet上的Internet应用协议。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>协议全称</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RIP</td>
+<td>Routing Information Protocol (动态路由选择协议)</td>
+<td>UDP 520</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>Hyper Text Transfer Protocol (超文本传输协议)</td>
+<td>TCP 80</td>
+</tr>
+<tr>
+<td>TELNET</td>
+<td>Teletype Network (远程登录协议)</td>
+<td>TCP 23</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>Secure Shell (安全壳协议)</td>
+<td>TCP 22</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>Domain Name System (域名系统)</td>
+<td>UDP 53</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>Simple Mail Transfer Protocol (简单邮件传输协议)</td>
+<td>TCP 25</td>
+</tr>
+<tr>
+<td>MIME</td>
+<td>Multipurpose Internet E-mail Extension (多用途网间邮件扩充协议)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>Post Office Protocol (邮局协议)</td>
+<td>TCP 110</td>
+</tr>
+<tr>
+<td>IMAP4</td>
+<td>Internet Message Access Protocol (消息访问协议)</td>
+<td>TCP 143, 993</td>
+</tr>
+<tr>
+<td>PGP</td>
+<td>Pretty Good Privacy</td>
+<td>-</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>File Transfer Protocol (文件传输协议)</td>
+<td>TCP 20/21</td>
+</tr>
+<tr>
+<td>TFTP</td>
+<td>Trivial File Transfer Protocol (简单文件传输协议)</td>
+<td>UDP 69</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>Network File System (网络文件系统)</td>
+<td>UDP 2049</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>Simple Network Management Protocol (简单网络管理协议)</td>
+<td>UDP 161/162</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>Dynamic Host Configuration Protocol (动态主机配置协议)</td>
+<td>UDP 67/68</td>
+</tr>
+<tr>
+<td>H.323</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SIP</td>
+<td>Session Initiation Protocol (会话启动协议)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>NTP</td>
+<td>Network Time Protocol (网络时间协议)</td>
+<td>UDP 123</td>
+</tr>
+<tr>
+<td>FINGER</td>
+<td>-</td>
+<td>UDP 79</td>
+</tr>
+<tr>
+<td>Whois</td>
+<td>-</td>
+<td>TCP 43</td>
+</tr>
+<tr>
+<td>LDAP</td>
+<td>Lightweight Directory Access Protocol (轻量级目录访问协议)</td>
+<td>TCP 389</td>
+</tr>
+<tr>
+<td>NNTP</td>
+<td>Network News Transfer Protocol (网络新闻传输协议)</td>
+<td>TCP 119</td>
+</tr>
+</tbody>
+</table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">信息网络安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息网络安全第三章 Internet协议的安全性</div>
+      <div>https://wyz10006.github.io/2025/03/17/信息网络安全第三章-Internet协议的安全性/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>竹合安木</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/11/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="信息网络安全第二章 计算机网络基础">
+                        <span class="hidden-mobile">信息网络安全第二章 计算机网络基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","appKey":"3LOGiBjL7YN8wgXZXHDkhDZD","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://tge3h6ei.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/meihua.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
