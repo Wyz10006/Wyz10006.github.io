@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/%E5%A4%B4%E5%83%8F.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="竹合安木">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、双钥密码体制的基本概念  1、陷门单向函数  单射：令函数 f 是集A到集B的映射，用 f : A→B表示。若对于任意x1≠x2，x1, x2∈A，有f (x1) ≠ f (x2)，则称 f 为单射，或1-1映射，或可逆的函数。 单向函数：一个可逆函数 f : A→B，若它满足： (1) 对所有x ∈A，易于计算 f (x)； (2) 对“几乎所有 x ∈A”，由 f (x)求 x 极为困难">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息网络安全第五章 双（公）钥密码体制">
+<meta property="og:url" content="https://wyz10006.github.io/2025/03/22/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%8F%8C%EF%BC%88%E5%85%AC%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/index.html">
+<meta property="og:site_name" content="竹合安木的博客">
+<meta property="og:description" content="一、双钥密码体制的基本概念  1、陷门单向函数  单射：令函数 f 是集A到集B的映射，用 f : A→B表示。若对于任意x1≠x2，x1, x2∈A，有f (x1) ≠ f (x2)，则称 f 为单射，或1-1映射，或可逆的函数。 单向函数：一个可逆函数 f : A→B，若它满足： (1) 对所有x ∈A，易于计算 f (x)； (2) 对“几乎所有 x ∈A”，由 f (x)求 x 极为困难">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/22/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%8F%8C%EF%BC%88%E5%85%AC%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/0.png">
+<meta property="article:published_time" content="2025-03-22T01:19:24.000Z">
+<meta property="article:modified_time" content="2025-03-22T08:21:25.630Z">
+<meta property="article:author" content="竹合安木">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/03/22/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%8F%8C%EF%BC%88%E5%85%AC%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/0.png">
+  
+  
+  
+  <title>信息网络安全第五章 双（公）钥密码体制 - 竹合安木的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/meihua.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wyz10006.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","app_key":"3LOGiBjL7YN8wgXZXHDkhDZD","server_url":"https://tge3h6ei.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>竹合安木的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/none.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息网络安全第五章 双（公）钥密码体制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-22 09:19" pubdate>
+          2025年3月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信息网络安全第五章 双（公）钥密码体制</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-双钥密码体制的基本概念"><a class="markdownIt-Anchor" href="#一-双钥密码体制的基本概念"></a> 一、双钥密码体制的基本概念</h2>
+<h3 id="1-陷门单向函数"><a class="markdownIt-Anchor" href="#1-陷门单向函数"></a> 1、陷门单向函数</h3>
+<ul>
+<li>单射：令函数 f 是集A到集B的映射，用 f : A→B表示。若对于任意x1≠x2，x1, x2∈A，有f (x1) ≠ f (x2)，则称 f 为单射，或1-1映射，或可逆的函数。</li>
+<li>单向函数：一个可逆函数 f : A→B，若它满足： (1) 对所有x ∈A，易于计算 f (x)； (2) 对“几乎所有 x ∈A”，由 f (x)求 x 极为困难，以至 于几乎是不可能的，则称 f 是一个单向函数。</li>
+<li>陷门单向函数：f<sub>z</sub>: A<sub>z</sub>→B<sub>z</sub>，z∈Z，Z是陷门信息集合。
+<ul>
+<li>对所有 z∈Z，在给定 z 下容易找到一对算法 E<sub>z</sub>和 D<sub>z</sub>，使对所有x∈A，易于计算 f<sub>z</sub>及其逆，即：$$f_z(x) = E_z(x)$$，$$D_z(f_z(x)) = x$$</li>
+<li>对所有z∈Z，当只给定 E<sub>z</sub>和 D<sub>z</sub> 时，对所有 x∈A，很难从y=f<sub>z</sub>(x)计算出 x 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-公钥密码体制"><a class="markdownIt-Anchor" href="#2-公钥密码体制"></a> 2、公钥密码体制</h3>
+<ul>
+<li>
+<p>公钥密码体制，又称非对称密码体制或双钥密码体制 (Public-key/Two-key/Asymmetric Cryptosystem)，其加密和解密数据使用不同的密钥。</p>
+</li>
+<li>
+<p>每个用户都拥有两个密钥：公钥和私钥</p>
+<ul>
+<li>公钥(public-key)：可以被任何人知道，用于加密或验证签名；</li>
+<li>私钥(private-key)：只能由持有者知道，用于解密或签名。</li>
+<li>由私钥及其他密码信息容易计算出公钥；而由公钥及算法描述，计算私钥却非常困难。</li>
+</ul>
+</li>
+<li>
+<p>公钥密码体制解决了密钥的发布和管理问题</p>
+<ul>
+<li>通信双方可以公开其公钥，而保留私钥。</li>
+<li>发方可以用收方公钥对发送的信息进行加密。</li>
+<li>收方用自己的私钥对收到的密文进行解密</li>
+</ul>
+</li>
+<li>
+<p>公钥密码体制的用途</p>
+<ul>
+<li>密钥分发：用于交换对称加密密钥。</li>
+<li>消息加密：用公钥加密，用私钥解密；</li>
+<li>数字签名：发送方采用自己的私钥对消息进行签名；接收方采用发送方的公钥对签名进行验证。</li>
+</ul>
+</li>
+<li>
+<p>公钥密码体制的安全性</p>
+<ul>
+<li>安全性依赖于解数学上的困难问题。
+<ul>
+<li>多项式求根、离散对数DL、大整数分解FAC、Diffie-Hellman问题(DHP)</li>
+</ul>
+</li>
+<li>目前，通常要求足够大的密钥长度(&gt;1024 bits) 。</li>
+<li>密钥太长会导致加密速度缓慢，因此公钥算法常用于密钥传递，而一般不用于实时数据加密。</li>
+</ul>
+</li>
+</ul>
+<h2 id="二-rsa密码体制"><a class="markdownIt-Anchor" href="#二-rsa密码体制"></a> 二、RSA密码体制</h2>
+<h3 id="1-rsa公钥算法的特点"><a class="markdownIt-Anchor" href="#1-rsa公钥算法的特点"></a> 1、RSA公钥算法的特点</h3>
+<ul>
+<li>RSA理论基础是一种特殊的可逆模指数运算，其安全性基于大整数分解的困难性。</li>
+<li>既可以用于消息加密，也可用于数字签名。</li>
+<li>硬件实现时比DES慢约1000倍。软件实现时比DES慢约100倍。</li>
+</ul>
+<h3 id="2-rsa公钥算法详解"><a class="markdownIt-Anchor" href="#2-rsa公钥算法详解"></a> 2、RSA公钥算法详解</h3>
+<ul>
+<li>设 n 是两个不同奇素数之积，即 𝑛 = 𝑝 × 𝑞，计算其欧拉函数值 𝜑(𝑛) = (𝑝 − 1)(𝑞 − 1)。</li>
+<li>随机选一整数𝑒, 1 ≤ 𝑒 &lt; 𝜑(𝑛) , gcd(𝜑(𝑛), 𝑒) = 1 ，因而在模 𝜑(𝑛)下, 𝑒有逆元：𝑑 = 𝑒<sup>−1</sup> mod 𝜑(𝑛)（费马小定理）</li>
+<li>取公钥为𝑛, 𝑒, 私钥为𝑑 ( p, q不再需要，可销毁，但绝不可泄露)。
+<ul>
+<li>加密变换为：c=m<sup>e</sup>mod n</li>
+<li>解密变换为：m=c<sup>d</sup>mod n</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-rsa算法的参数选择"><a class="markdownIt-Anchor" href="#3-rsa算法的参数选择"></a> 3、RSA算法的参数选择</h3>
+<ul>
+<li>模数 𝑛 = 𝑝.𝑞 大于1024bit</li>
+<li>p, q为大素数</li>
+<li>p-1，q-1有大的素因子</li>
+<li>p+1，q+1也要有大的素因子</li>
+<li>e不能太小，例如 e 值为 (216+1) = 65537</li>
+<li>e 必须要与 𝜑(𝑛)互素</li>
+</ul>
+<h3 id="4-rsa算法的局限性"><a class="markdownIt-Anchor" href="#4-rsa算法的局限性"></a> 4、RSA算法的局限性</h3>
+<ul>
+<li>计算效率低，加解密速度慢，不适合加密大量数据</li>
+<li>密钥长度需求高，存储资源和传输开销大</li>
+<li>存在确定性加密的弱点
+<ul>
+<li>为了增强安全性，RSA通常需要结合随机化技术（如OAEP填充）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-elgamal密码体制"><a class="markdownIt-Anchor" href="#三-elgamal密码体制"></a> 三、ElGamal密码体制</h2>
+<h3 id="1-算法描述"><a class="markdownIt-Anchor" href="#1-算法描述"></a> 1、算法描述</h3>
+<ul>
+<li>其安全性依赖于离散对数问题（discrete logarithms problem）</li>
+<li>选择素数 p，设GF(p)上的本原元为 g</li>
+<li>选择私钥： α in GF(p)*（except 0）</li>
+<li>计算公钥：β = g<sup>α</sup> mod p</li>
+<li>选择一个随机数：k，且(𝑘, 𝑝 − 1) = 1</li>
+<li>加密：m → (gᵏ , mβᵏ) mod p = (y₁, y₂) = c</li>
+<li>解密：m = y₂(y₁)⁻ᵃ mod p</li>
+</ul>
+<h3 id="2-安全性讨论"><a class="markdownIt-Anchor" href="#2-安全性讨论"></a> 2、安全性讨论</h3>
+<ul>
+<li>ElGamal的安全性基于有限域中离散对数问题的难解性。</li>
+<li>通常使用的素数 p 的长度为2048位或更长，以确保足够的安全性；安全性与RSA相当，但ElGamal的密文长度是明文的两倍，效率较低。</li>
+<li>在加密过程中引入了随机数，使相同的明文每次加密后生成的密文都不同；这一密文的随机化特性增强了其安全性，防止了确定性加密的弱点。</li>
+</ul>
+<h2 id="四-椭圆曲线密码体制"><a class="markdownIt-Anchor" href="#四-椭圆曲线密码体制"></a> 四、椭圆曲线密码体制</h2>
+<h3 id="1-实数域上的椭圆曲线"><a class="markdownIt-Anchor" href="#1-实数域上的椭圆曲线"></a> 1、实数域上的椭圆曲线</h3>
+<ul>
+<li>
+<p>实数域上的椭圆曲线可以定义为满足方程：y² = x³ + ax + b 的所有点（x，y）的集合</p>
+<ul>
+<li>注意：椭圆曲线并不是椭圆，只因为该方程与计算椭圆周长的方程相似。</li>
+</ul>
+</li>
+<li>
+<p>可以证明：如果 x³ + ax + b 没有重复因子，或者满足 4a³ + 27b² ≠ 0，那么椭圆曲线上的点集 E(a, b) 可构成一个 Abel 群。</p>
+</li>
+<li>
+<p>椭圆曲线群包括所有曲线上点以及一个特殊的点，我们称其为无限远点 O。</p>
+</li>
+<li>
+<p>群定义：</p>
+<ul>
+<li>在集合上定义某种运算</li>
+<li>运算满足封闭性</li>
+<li>满足结合律</li>
+<li>有单位元和逆元。<br />
+满足以上条件，我们就称这个集合为群。</li>
+<li>若还满足交换律，则构成 Abel 群。</li>
+</ul>
+</li>
+<li>
+<p>实数域椭圆曲线上加法：P+Q</p>
+<img src="/2025/03/22/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%8F%8C%EF%BC%88%E5%85%AC%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/0.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>能找到𝑃的逆元−𝑃，使得 𝑃 + (−𝑃) = 𝒪（无穷远点）</p>
+</li>
+<li>
+<p>加法满足封闭性：𝟐𝑷 = 𝑷 + 𝑷 = R</p>
+</li>
+</ul>
+<h3 id="2-有限域epa-b上的椭圆曲线"><a class="markdownIt-Anchor" href="#2-有限域epa-b上的椭圆曲线"></a> 2、有限域E<sub>p</sub>(a, b)上的椭圆曲线</h3>
+<ul>
+<li>
+<p>有限域 GF(p) 上的椭圆曲线 y² = x³ + ax + b，其点集 (x, y) 构成有限域上的 Abel 群，记为 E<sub>p</sub>(a, b)。条件为4a³ + 27b² ≠ 0 mod p</p>
+</li>
+<li>
+<p>设 P = (x₁, y₁)，Q = (x₂, y₂)，P + Q = (x₃, y₃)</p>
+<ul>
+<li>
+<p>当 P ≠ Q 时：</p>
+<ul>
+<li>λ = (y₂ - y₁) / (x₂ - x₁) mod p</li>
+<li>x₃ = (λ² - x₁ - x₂) mod p</li>
+<li>y₃ = (λ(x₁ - x₃) - y₁) mod p</li>
+</ul>
+</li>
+<li>
+<p>当 P = Q 时：</p>
+<ul>
+<li>λ = (3x₁² + a) / (2y₁) mod p</li>
+<li>x₃ = (λ² - x₁ - x₂) mod p</li>
+<li>y₃ = (λ(x₁ - x₃) - y₁) mod p</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-椭圆曲线密码"><a class="markdownIt-Anchor" href="#3-椭圆曲线密码"></a> 3、椭圆曲线密码</h3>
+<ul>
+<li>
+<p>椭圆曲线上的离散对数问题——ECDLP：在椭圆曲线构成的 Abel 群 E<sub>p</sub>(a, b) 上，考虑方程：Q = kP，其中 P, Q ∈ E<sub>p</sub>(a, b)，k &lt; p，由 k 和 P 计算 Q 非常容易，而由 P, Q 计算 k 则非常困难。</p>
+</li>
+<li>
+<p>椭圆曲线上的 Diffie-Hellman 密钥交换</p>
+<ul>
+<li>
+<p>A 选择一个小 n 的整数 n<sub>A</sub> 作为私钥，由 P<sub>A</sub> = n<sub>A</sub> G 产生 E<sub>p</sub>(a, b) 上的一个点作为公钥。</p>
+</li>
+<li>
+<p>B 选取自己的私钥 n<sub>B</sub>，并计算自己的公钥 P<sub>B</sub> = n<sub>B</sub> G。</p>
+</li>
+<li>
+<p>A 可以获得 B 的公钥 P<sub>B</sub>。</p>
+</li>
+<li>
+<p>B 可以获得 A 的公钥 P<sub>A</sub>。</p>
+</li>
+<li>
+<p>A 计算：K = n<sub>A</sub> × P<sub>B</sub> = n<sub>A</sub> n<sub>B</sub> G</p>
+</li>
+<li>
+<p>B 计算：K = n<sub>B</sub> × P<sub>A</sub> = n<sub>B</sub> n<sub>A</sub>G</p>
+</li>
+<li>
+<p>至此，A 和 B 共同拥有密钥 K = n<sub>A</sub> n<sub>B</sub> G。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>椭圆曲线公钥加密/解密算法</p>
+<ul>
+<li>
+<p>准备阶段</p>
+<ul>
+<li>A 选择一个小 n 的整数 n<sub>A</sub> 作为私钥，由 P<sub>A</sub> = n<sub>A</sub>G 产生 E<sub>p</sub>(a, b) 上的一个点作为公钥。</li>
+<li>B 选取自己的私钥 n<sub>B</sub>，并计算自己的公钥 P<sub>B</sub> = n<sub>B</sub>G。</li>
+</ul>
+</li>
+<li>
+<p>加密阶段</p>
+<ul>
+<li>若 A 要将消息 m 加密后发给 B，则 A 选择一个随机数 k，计算：C = {C₁, C₂} = {kG, m + kP<sub>B</sub>}</li>
+</ul>
+</li>
+<li>
+<p>解密阶段</p>
+<ul>
+<li>B 收到密文 C 后，需用 C₂ 减去 C₁ 与 B 的私钥之乘积：m = (m + kP<sub>B</sub>) - n<sub>B</sub>(kG) = m + k(n<sub>B</sub>G) - n<sub>B</sub>(kG)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>相比于RSA密码体制，椭圆曲线密码体制最大的优势在于可以使用比RSA更短的密钥来获得相同水平的安全性，从而使计算量大大减少。</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">信息网络安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息网络安全第五章 双（公）钥密码体制</div>
+      <div>https://wyz10006.github.io/2025/03/22/信息网络安全第五章-双（公）钥密码体制/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>竹合安木</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/20/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%8D%95%EF%BC%88%E7%A7%81%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/" title="信息网络安全第四章 单（私）钥密码体制">
+                        <span class="hidden-mobile">信息网络安全第四章 单（私）钥密码体制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","appKey":"3LOGiBjL7YN8wgXZXHDkhDZD","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://tge3h6ei.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/meihua.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
