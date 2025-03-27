@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/%E5%A4%B4%E5%83%8F.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="竹合安木">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、认证函数  1、消息加密  单钥加密不能保证消息的真实性。 公钥加密也不能保证消息的真实性。  发方Alice采用收方Bob的公钥𝐾𝑃𝐵对消息𝑚进行加密，因只有Bob知道自己的私钥𝐾𝑆𝐵，故只有Bob才能对收到的消息准确解密。 任何人可以假冒Alice，用Bob的公钥𝐾𝑃𝐵对消息m加密。因此，这种方法不能确保发送者身份的真实性。     2、消息认证码  保密性（conf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息网络安全第六章 消息认证和杂凑函数">
+<meta property="og:url" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="竹合安木的博客">
+<meta property="og:description" content="一、认证函数  1、消息加密  单钥加密不能保证消息的真实性。 公钥加密也不能保证消息的真实性。  发方Alice采用收方Bob的公钥𝐾𝑃𝐵对消息𝑚进行加密，因只有Bob知道自己的私钥𝐾𝑆𝐵，故只有Bob才能对收到的消息准确解密。 任何人可以假冒Alice，用Bob的公钥𝐾𝑃𝐵对消息m加密。因此，这种方法不能确保发送者身份的真实性。     2、消息认证码  保密性（conf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/1.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/2.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/3.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/4.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/5.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/6.png">
+<meta property="article:published_time" content="2025-03-24T11:48:30.000Z">
+<meta property="article:modified_time" content="2025-03-27T03:25:11.076Z">
+<meta property="article:author" content="竹合安木">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/1.png">
+  
+  
+  
+  <title>信息网络安全第六章 消息认证和杂凑函数 - 竹合安木的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/meihua.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wyz10006.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","app_key":"3LOGiBjL7YN8wgXZXHDkhDZD","server_url":"https://tge3h6ei.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>竹合安木的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/none.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息网络安全第六章 消息认证和杂凑函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-24 19:48" pubdate>
+          2025年3月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信息网络安全第六章 消息认证和杂凑函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-认证函数"><a class="markdownIt-Anchor" href="#一-认证函数"></a> 一、认证函数</h2>
+<h3 id="1-消息加密"><a class="markdownIt-Anchor" href="#1-消息加密"></a> 1、消息加密</h3>
+<ul>
+<li>单钥加密不能保证消息的真实性。</li>
+<li>公钥加密也不能保证消息的真实性。
+<ul>
+<li>发方Alice采用收方Bob的公钥𝐾<sub>𝑃</sub><sup>𝐵</sup>对消息𝑚进行加密，因只有Bob知道自己的私钥𝐾<sub>𝑆</sub><sup>𝐵</sup>，故只有Bob才能对收到的消息准确解密。</li>
+<li>任何人可以假冒Alice，用Bob的公钥𝐾<sub>𝑃</sub><sup>𝐵</sup>对消息m加密。因此，这种方法不能确保发送者身份的真实性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-消息认证码"><a class="markdownIt-Anchor" href="#2-消息认证码"></a> 2、消息认证码</h3>
+<ul>
+<li>保密性（confidentiality ）——采用加密机制；<br />
+真实性 （authenticity ）——采用认证机制。</li>
+<li>认证方式的分类：
+<ul>
+<li>对称认证 （symmetric authentication）：通信双方相互信任的认证，主要防止来自第三方的攻击，例如检查文件是否被人修改过。</li>
+<li>非对称认证 （asymmetric authentication）：通信双方相互不信任的认证，主要防止来自对方的攻击，例如查验收到的文件是否真实。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-杂凑函数"><a class="markdownIt-Anchor" href="#3-杂凑函数"></a> 3、杂凑函数</h3>
+<ul>
+<li>信息的真实性可以通过验证一个数据的短烙印（imprint）或Hash值的真实性来确认。</li>
+<li>Hash函数来源于计算机技术：将任意串压缩成定长的比特串。</li>
+<li>Hash函数的一些常见称谓：
+<ul>
+<li>中文：杂凑函数、哈希函数</li>
+<li>英文：hash code, hash total, hash result, imprint, checksum, compression, compressed encoding, authenticator, fingerprint, Message Integrity Code, message digest</li>
+</ul>
+</li>
+<li>常用hash 函数有 MD5, SHA及采用分组密码算法构造的hash函数等。</li>
+<li>算法特点：不定长度输入，固定长度输出（MD5输出为16字节、SHA-1输出长度为20字节）。</li>
+<li>雪崩效应：若输入发生很小的变动，则可引起输出较大变动。</li>
+<li>完全单向：已知输出无法推算出输入，已知两个输出的差别无法推算出输入的差别。</li>
+</ul>
+<h2 id="二-消息认证码"><a class="markdownIt-Anchor" href="#二-消息认证码"></a> 二、消息认证码</h2>
+<h3 id="1-对mac的要求"><a class="markdownIt-Anchor" href="#1-对mac的要求"></a> 1、对MAC的要求</h3>
+<ul>
+<li>MAC也称为密码校验和，它由下述形式的函数𝐶产生： MAC=𝐶<sub>𝐾</sub>(𝑀) 。其中，𝑀是变长消息，𝐾是双方共享的密钥，𝐶<sub>𝐾</sub>(𝑀)是定长的认证符。</li>
+<li>若攻击者已知M和C<sub>K</sub>(M)，则他构造满足C<sub>K</sub>(M’) = C<sub>K</sub>(M)的消息M’，在计算上是不可行的。</li>
+<li>C<sub>K</sub>(M)应是均匀分布的，即对任何随机选择的消息M和M’，C<sub>K</sub> (M’) = C<sub>K</sub>(M)的概率是2<sup>-n</sup> 其中n是MAC的位数。</li>
+<li>设M’是M的某个已知的变换，即M’ = f(M)。例如f可表示逆转M的一位或多位，那么Pr [C<sub>K</sub> (M) = C<sub>K</sub> (M’)] = 2<sup>-n</sup>。</li>
+<li>认证算法对消息的某一部分或位不应比其他部分或位更弱。</li>
+</ul>
+<h3 id="2-基于杂凑函数的mac"><a class="markdownIt-Anchor" href="#2-基于杂凑函数的mac"></a> 2、基于杂凑函数的MAC</h3>
+<ul>
+<li>MAC也称为密码校验和，它由下述函数产生：MAC=H(m||k)。其中，𝑚 是一个变长的消息，𝑘 是收发双方共享的密钥，𝐻(𝑚||𝑘) 是定长的认证符。
+<ul>
+<li>在实际中，发送者将消息𝑚 和此认证符一起发给接收者：{𝑚, 𝐻(𝑚||𝑘)}</li>
+<li>接收者在收到消息𝑚之后，计算： MAC′ = 𝐻(𝑚′||𝑘)，若不相等说明消息被篡改了。</li>
+</ul>
+</li>
+<li>MAC的应用：消息的完整性 + 源点认证
+<ul>
+<li>无消息加密的功能，只能用于消息源点认证和消息完整性认证；</li>
+<li>为确保消息真实性，可以首先计算MAC = 𝐻(𝑚||𝑘)，然后将其附在信息的后面，即{𝑚, 𝐻(𝑚||𝑘)}。</li>
+<li>消息的真实性依赖于共享密钥的真实性和保密性，对消息真实性的保护已经转化成安全地在通信双方之间建立共享密钥的问题。</li>
+</ul>
+</li>
+<li>MDC也称为篡改检测码，它由下述函数产生：MDC=H(m)。其中，𝑚 是一个变长的消息，𝐻(𝑚) 是定长的杂凑函数值作为认证符。
+<ul>
+<li>在实际中，发送者将消息𝑚和此认证符一起发给接收者： {𝑚, 𝐻(𝑚)}</li>
+<li>接收者在收到消息𝑚′ 之后，计算：𝑀𝐷𝐶′ = 𝐻(𝑚′)，若不相等说明消息被改动了。</li>
+</ul>
+</li>
+<li>MDC的应用：消息的完整性
+<ul>
+<li>如果采用MDC, 消息的真实性就转化成检验一个固定长度比特串的真实性（不需共享密钥），即 MDC = H(m) ；</li>
+<li>需要认证信道传输 MDC：发送者需要将MDC通过一特定的信道传送给对方。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-基于分组加密算法的mac"><a class="markdownIt-Anchor" href="#3-基于分组加密算法的mac"></a> 3、基于分组加密算法的MAC</h3>
+<p>CBC-MAC是一种基于分组密码算法E生成的MAC，通过CBC分组加密模式对明文分组&lt;m<sub>1</sub>, m<sub>2</sub>, …, m<sub>l</sub>&gt;逐组加密，生成的最后一组密文，即为CBC-MAC。CBC-MAC = C<sub>l</sub> = E<sub>k</sub>(m<sub>l</sub> ⊕ C<sub>l-1</sub>)。</p>
+<ul>
+<li>消息分组：将认证消息M进行分组：M = m<sub>1</sub>m<sub>2</sub> … m<sub>l</sub></li>
+<li>消息填充：若m<sub>l</sub>长度小于分组长度，对其填充一些随机值</li>
+<li>CBC加密：发送者用CBC加密：C<sub>i</sub> ← E<sub>k</sub>(m<sub>i</sub> ⊕ C<sub>i-1</sub>), i = 1, 2, …, l 其中C<sub>0</sub> = IV（随机初始向量）</li>
+<li>消息发送：发送者发送消息： (M || IV, C<sub>l</sub>)</li>
+<li>消息验证：接收者通过M与IV重复1~3步得到C<sub>l</sub>’ 并验证是否有C<sub>l</sub>’ = C<sub>l</sub></li>
+</ul>
+<h2 id="三-杂凑函数"><a class="markdownIt-Anchor" href="#三-杂凑函数"></a> 三、杂凑函数</h2>
+<h3 id="1-单向杂凑函数"><a class="markdownIt-Anchor" href="#1-单向杂凑函数"></a> 1、单向杂凑函数</h3>
+<h4 id="杂凑函数的概念"><a class="markdownIt-Anchor" href="#杂凑函数的概念"></a> 杂凑函数的概念</h4>
+<ul>
+<li>杂凑(Hash)函数是将任意长的数字串𝑚映射成一个较短定长输出数字串的函数，我们关心的通常是单向杂凑函数。</li>
+<li>单向杂凑函数 𝑦 = 𝐻(𝑥)，可将任意长度的x变换成固定长度的𝑦，并满足：
+<ul>
+<li>快速性：任给𝑥，计算𝑦 = 𝐻(𝑥)容易；</li>
+<li>单向性：任给𝑦，由𝑦 = 𝐻(𝑥)计算𝑥困难；</li>
+<li>无碰撞：寻找𝑥<sub>1</sub>≠ 𝑥<sub>2</sub> ，满足𝐻(𝑥<sub>1</sub>) = 𝐻(𝑥<sub>2</sub>)是困难的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="杂凑函数应满足的条件"><a class="markdownIt-Anchor" href="#杂凑函数应满足的条件"></a> 杂凑函数应满足的条件</h4>
+<ul>
+<li>函数的输入可以是任意长度</li>
+<li>函数的输出是固定长度</li>
+<li>已知 𝑥，求 𝐻 (𝑥) 较为容易，可用硬件或软件实现</li>
+<li>已知 ℎ，求使得 𝐻 (𝑥) = ℎ 的 𝑥 在计算上是不可行的，这一性质称为函数的单向性，称 𝐻 (𝑥) 为单向杂凑函数</li>
+<li>已知𝑥，找出 𝑦(𝑦 ≠ 𝑥)，使得𝐻 (𝑦) = 𝐻 (𝑥) 在计算上是不可行的</li>
+<li>找出任意两个不同的输入𝑥和𝑦，使得𝐻(𝑦) = 𝐻(𝑥)在计算上是不可行的</li>
+</ul>
+<h4 id="强单向杂凑函数与弱单向杂凑函数的区别"><a class="markdownIt-Anchor" href="#强单向杂凑函数与弱单向杂凑函数的区别"></a> 强单向杂凑函数与弱单向杂凑函数的区别</h4>
+<ul>
+<li>给定单向杂凑函数H(x)，对任意给定m，其杂凑值h = H(m)，要找出另外一个m’，使h = H(m’)在计算上不可行，则称H(x)为弱单向杂凑函数。</li>
+<li>给定单向杂凑函数H(x)，若要找到任意一对输入m<sub>1</sub>、m<sub>2</sub>，且m<sub>1</sub> ≠ m<sub>2</sub>，使H(m<sub>1</sub>) = H(m<sub>2</sub>)在计算上不可行，则称H(x)为强单向杂凑函数。</li>
+</ul>
+<h4 id="杂凑函数的安全性"><a class="markdownIt-Anchor" href="#杂凑函数的安全性"></a> 杂凑函数的安全性</h4>
+<ul>
+<li>抗碰撞攻击：找到两个不同的消息x<sub>1</sub>和x<sub>2</sub> (x<sub>1</sub> ≠ x<sub>2</sub>)，使得H(x<sub>1</sub>) = H(x<sub>2</sub>)在计算上不可行。</li>
+<li>抗原像攻击：给定任意n-bit的杂凑值y，找一个输入串x，使得y = H(x)在计算上不可行。</li>
+<li>抗第二原像攻击：给定任意消息x<sub>1</sub>，找另一消息x<sub>2</sub>，使得H(x<sub>1</sub>) = H(x<sub>2</sub>)在计算上不可行。</li>
+</ul>
+<h3 id="2-杂凑函数在密码学中的应用"><a class="markdownIt-Anchor" href="#2-杂凑函数在密码学中的应用"></a> 2、杂凑函数在密码学中的应用</h3>
+<p>杂凑函数除了可用于数字签名方案之外，还可用于其它方面，诸如消息完整性检测、消息源点认证检测等。</p>
+<ul>
+<li>数字签名
+<ul>
+<li>首先，将要签署的消息进行杂凑得到MDC；</li>
+<li>此后，采用数字签名算法对MDC进行数字签名；</li>
+<li>验证签名时，只需验证MDC的正确性，可判断签名的真伪。</li>
+</ul>
+</li>
+<li>消息篡改检测
+<ul>
+<li>杂凑函数被广泛地用于消息的完整性验证。</li>
+<li>杂凑函数被广泛地用于消息的完整性验证。</li>
+</ul>
+</li>
+<li>随机数发生器
+<ul>
+<li>杂凑函数被广泛地用作实用的伪随机函数生成器。</li>
+<li>用于密钥协商，认证协议，流密码，零知识证明等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-分组迭代单向杂凑函数的层次结构"><a class="markdownIt-Anchor" href="#3-分组迭代单向杂凑函数的层次结构"></a> 3、分组迭代单向杂凑函数的层次结构</h3>
+<p>要将不限长度的输入数据压缩为输出定长𝑛比特的杂凑值，需进行多次操作，在实际应用中总是先将输入划分为固定长度为𝑚比特的段。</p>
+<ul>
+<li>首先对消息长度进行检查，当输入串的长度不是𝑚的整倍数时，用填充方法使最后一个段的长度补足为𝑚比特。</li>
+<li>对于每一段长度为𝑚比特的段映射为长度为𝑛比特的段，并采用类似于分组密文反馈的模式进行映射操作，直到全部输入串映射完成，以最后的输出值作为整个输入的杂凑值。</li>
+<li>根据𝑚和𝑛之间的关系可将迭代映射函数分为三类。
+<ul>
+<li>当𝑚 &gt; 𝑛时，有数据压缩，如MD-5和SHA等算法是不可逆映射。</li>
+<li>当𝑚 = 𝑛时，无数据压缩，通常分组密码采用此类。</li>
+<li>当𝑚 &lt; 𝑛时，有数据扩展，认证码属于此类。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-迭代杂凑函数的构造方法"><a class="markdownIt-Anchor" href="#4-迭代杂凑函数的构造方法"></a> 4、迭代杂凑函数的构造方法</h3>
+<ul>
+<li>首先，将信息 X 分为 t 个分组：X<sub>1</sub>, X<sub>2</sub>, … , X<sub>t</sub>（如必要，需补位填充（padding），使 t 个分组的长度相同）。</li>
+<li>生成随机数作为初始化矢量 III，迭代计算：h<sub>0</sub> = III, h<sub>1</sub> = f(X<sub>1</sub>, h<sub>0</sub>),  … , h<sub>t</sub> = f(X<sub>t</sub>, h<sub>t-1</sub>),  H(X) = g(h<sub>t</sub>)</li>
+<li>𝐻(𝑋) 为Hash函数，𝑓为轮函数，𝑔为输出变换。</li>
+<li>初始值IV和填充padding将对安全有重要影响。</li>
+</ul>
+<h3 id="5-应用杂凑函数的基本方式"><a class="markdownIt-Anchor" href="#5-应用杂凑函数的基本方式"></a> 5、应用杂凑函数的基本方式</h3>
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/1.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/2.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/3.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/4.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/5.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/03/24/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%82%E5%87%91%E5%87%BD%E6%95%B0/6.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="6-hash码的分类"><a class="markdownIt-Anchor" href="#6-hash码的分类"></a> 6、Hash码的分类</h3>
+<ul>
+<li>校验和CRC: Cyclic Redundancy Check，即循环冗余校验码，是数据通信中常用的一种差错校验码。</li>
+<li>消息认证码MAC: Message Authentication Code，MAC算法是有密钥参与杂凑运算的算法。</li>
+<li>消息检测码MDC: Message Detection Code，MDC算法是无密钥参与杂凑运算的算法。</li>
+<li>无碰撞性Hash函数: Collision-Free Hash Function，无碰撞的Hash函数是存在的，但在实际中很难找到它们。</li>
+</ul>
+<h2 id="四-hmac"><a class="markdownIt-Anchor" href="#四-hmac"></a> 四、HMAC</h2>
+<h3 id="1-hmac的定义和功能"><a class="markdownIt-Anchor" href="#1-hmac的定义和功能"></a> 1、HMAC的定义和功能</h3>
+<p>HMAC (Hash-based Message Authentication Code)：用于验证消息完整性和真实性。它采用杂凑函数和一个密钥，生成一个固定长度的认证码，确保消息在传输过程中未被篡改，且来源可信。</p>
+<ul>
+<li>
+<p>HMAC 的功能</p>
+<ul>
+<li>消息完整性验证：确保消息在传输过程中未被篡改。</li>
+<li>消息真实性验证：确保消息来源真实，双方拥有共享密钥才能生成和验证 HMAC 值。</li>
+<li>防止重放攻击：HMAC 可以结合时间戳或序列号，防止攻击者重放旧消息。</li>
+</ul>
+</li>
+<li>
+<p>HMAC 的工作原理</p>
+<ul>
+<li>密钥共享：发送方和接收方共享一个密钥。</li>
+<li>生成 HMAC：发送方使用密钥和杂凑函数以生成消息的 HMAC 值。</li>
+<li>消息传输：发送方将消息和 HMAC 值一起发送给接收方。</li>
+<li>HMAC 值验证：接收方使用相同密钥和杂凑函数重新计算 HMAC 值，并与接收到的 HMAC 值比对。如果一致，可确定消息未被篡改且来源可信。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-hmac的设计目标"><a class="markdownIt-Anchor" href="#2-hmac的设计目标"></a> 2、HMAC的设计目标</h3>
+<ul>
+<li>可不经修改而使用现有的杂凑函数</li>
+<li>其中镶嵌的杂凑函数可易于替换为更快、更安全的杂凑函数（HMAC 将杂凑函数看成“黑匣子”）</li>
+<li>保持镶嵌的杂凑函数的最初性能，不因用于 HMAC 而使性能降低</li>
+<li>以简单方式使用和处理密钥</li>
+<li>在对镶嵌的杂凑函数合理假设基础上，易于分析 HMAC 的密码强度</li>
+</ul>
+<h3 id="3-hmac的安全性"><a class="markdownIt-Anchor" href="#3-hmac的安全性"></a> 3、HMAC的安全性</h3>
+<ul>
+<li>基于密码杂凑函数构造的MAC的安全性取决于<strong>镶嵌杂凑函数</strong>的安全性， 对HMAC的攻击等价于对内嵌杂凑函数的下述两种攻击之一。
+<ul>
+<li>攻击者能够计算压缩函数的一个输出，即使IV是随机的和秘密的。</li>
+<li>攻击者能够找出杂凑函数的碰撞，即使IV是随机的和秘密的。</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">信息网络安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息网络安全第六章 消息认证和杂凑函数</div>
+      <div>https://wyz10006.github.io/2025/03/24/信息网络安全第六章-消息认证和杂凑函数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>竹合安木</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年3月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/22/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%8F%8C%EF%BC%88%E5%85%AC%EF%BC%89%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6/" title="信息网络安全第五章 双（公）钥密码体制">
+                        <span class="hidden-mobile">信息网络安全第五章 双（公）钥密码体制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","appKey":"3LOGiBjL7YN8wgXZXHDkhDZD","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://tge3h6ei.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/meihua.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
