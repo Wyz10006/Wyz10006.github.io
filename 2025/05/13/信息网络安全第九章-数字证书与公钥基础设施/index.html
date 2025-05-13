@@ -16,37 +16,34 @@
   <meta name="author" content="竹合安木">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、协议的基本概念  协议的定义：协议是指由两个或两个以上的参与者为完成某项特定的任务而采取的一系列步骤。  协议自始至终是有序的过程，每一步骤必须依次执行。 协议至少需要两个参与者。 通过执行协议必须能够完成某项任务。   密码协议也称安全协议，以密码算法为基础构造，目的是在网络环境中提供各种安全服务。它由多方参与执行，并达到秘密信息交换、实体身份认证和信息完整性保护的安全目标。   1、仲裁">
+    <meta name="description" content="一、PKI的基本概念  1、PKI的定义  PKI：公钥基础设施(Public Key Infrastructure)基于公钥密码理论，可为信息系统提供安全服务，是一种普适性的安全基础设施。 PKI的目的：解决网上身份认证、电子信息的完整性和不可抵赖性等安全问题，为网络应用提供可靠安全服务。 PKI的任务：在电子商务和电子政务中，可以为网络用户提供可信的数字身份认证。   2、PKI的组成  证">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息网络安全第八章 密码协议">
-<meta property="og:url" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:title" content="信息网络安全第九章 数字证书与公钥基础设施">
+<meta property="og:url" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/index.html">
 <meta property="og:site_name" content="竹合安木的博客">
-<meta property="og:description" content="一、协议的基本概念  协议的定义：协议是指由两个或两个以上的参与者为完成某项特定的任务而采取的一系列步骤。  协议自始至终是有序的过程，每一步骤必须依次执行。 协议至少需要两个参与者。 通过执行协议必须能够完成某项任务。   密码协议也称安全协议，以密码算法为基础构造，目的是在网络环境中提供各种安全服务。它由多方参与执行，并达到秘密信息交换、实体身份认证和信息完整性保护的安全目标。   1、仲裁">
+<meta property="og:description" content="一、PKI的基本概念  1、PKI的定义  PKI：公钥基础设施(Public Key Infrastructure)基于公钥密码理论，可为信息系统提供安全服务，是一种普适性的安全基础设施。 PKI的目的：解决网上身份认证、电子信息的完整性和不可抵赖性等安全问题，为网络应用提供可靠安全服务。 PKI的任务：在电子商务和电子政务中，可以为网络用户提供可信的数字身份认证。   2、PKI的组成  证">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/0.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/1.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/2.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/3.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/4.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/5.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/6.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/7.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/8.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/9.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/10.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/11.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/12.png">
-<meta property="og:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/13.png">
-<meta property="article:published_time" content="2025-04-07T11:40:00.000Z">
-<meta property="article:modified_time" content="2025-05-12T16:31:26.681Z">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/0.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/1.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/2.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/3.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/4.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/5.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/8.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/6.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/7.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/9.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/10.png">
+<meta property="article:published_time" content="2025-05-13T07:58:08.000Z">
+<meta property="article:modified_time" content="2025-05-13T14:43:46.312Z">
 <meta property="article:author" content="竹合安木">
 <meta property="article:tag" content="网络安全">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wyz10006.github.io/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/0.png">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/0.png">
   
   
   
-  <title>信息网络安全第八章 密码协议 - 竹合安木的博客</title>
+  <title>信息网络安全第九章 数字证书与公钥基础设施 - 竹合安木的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="信息网络安全第八章 密码协议"></span>
+            <span id="subtitle" data-typed-text="信息网络安全第九章 数字证书与公钥基础设施"></span>
           
         </div>
 
@@ -256,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-07 19:40" pubdate>
-          2025年4月7日 晚上
+        <time datetime="2025-05-13 15:58" pubdate>
+          2025年5月13日 下午
         </time>
       </span>
     
@@ -268,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.3k 字
         
       </span>
     
@@ -279,7 +276,7 @@
         
         
         
-          16 分钟
+          11 分钟
         
       </span>
     
@@ -324,163 +321,184 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">信息网络安全第八章 密码协议</h1>
+            <h1 id="seo-header">信息网络安全第九章 数字证书与公钥基础设施</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="一-协议的基本概念"><a class="markdownIt-Anchor" href="#一-协议的基本概念"></a> 一、协议的基本概念</h2>
+                <h2 id="一-pki的基本概念"><a class="markdownIt-Anchor" href="#一-pki的基本概念"></a> 一、PKI的基本概念</h2>
+<h3 id="1-pki的定义"><a class="markdownIt-Anchor" href="#1-pki的定义"></a> 1、PKI的定义</h3>
 <ul>
-<li>协议的定义：协议是指由两个或两个以上的参与者为完成某项特定的任务而采取的一系列步骤。
+<li>PKI：公钥基础设施(Public Key Infrastructure)基于公钥密码理论，可为信息系统提供安全服务，是一种普适性的安全基础设施。</li>
+<li>PKI的目的：解决网上身份认证、电子信息的完整性和不可抵赖性等安全问题，为网络应用提供可靠安全服务。</li>
+<li>PKI的任务：在电子商务和电子政务中，可以为网络用户提供可信的数字身份认证。</li>
+</ul>
+<h3 id="2-pki的组成"><a class="markdownIt-Anchor" href="#2-pki的组成"></a> 2、PKI的组成</h3>
+<h4 id="证书机构ca-certificate-authority"><a class="markdownIt-Anchor" href="#证书机构ca-certificate-authority"></a> 证书机构CA （Certificate Authority ）</h4>
 <ul>
-<li>协议自始至终是有序的过程，每一步骤必须依次执行。</li>
-<li>协议至少需要两个参与者。</li>
-<li>通过执行协议必须能够完成某项任务。</li>
+<li>CA负责签发和管理数字证书。</li>
+<li>提供网络身份认证、负责证书签发及证书的管理。
+<ul>
+<li>跟踪证书状态。</li>
+<li>在证书需要撤销时发布证书撤销通知。</li>
 </ul>
 </li>
-<li>密码协议也称安全协议，以密码算法为基础构造，目的是在网络环境中提供各种安全服务。它由多方参与执行，并达到秘密信息交换、实体身份认证和信息完整性保护的安全目标。</li>
+<li>维护数字证书档案，以及数字证书相关的审计。</li>
 </ul>
-<h3 id="1-仲裁协议"><a class="markdownIt-Anchor" href="#1-仲裁协议"></a> 1、仲裁协议</h3>
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/0.png" srcset="/img/loading.gif" lazyload class="">
+<h4 id="注册机构ra"><a class="markdownIt-Anchor" href="#注册机构ra"></a> 注册机构RA</h4>
 <ul>
-<li>协议中引入仲裁时，由于仲裁者需要对每次对话加以处理，会增加时延。当用户量很大时，有可能成为系统的瓶颈。</li>
-<li>仲裁者的服务器会成为黑客攻击的目标。一旦仲裁服务器被攻破，通信双方的信息就会泄露。在此类协议中，对仲裁服务器的安全保护是重点。</li>
+<li>注册机构（RA）是数字证书注册审批机构，是认证中心的延伸。</li>
+<li>RA按照政策与管理规范对用户的资格进行审查，并执行“是否同意给该申请者发放证书、撤销证书”等操作。</li>
 </ul>
-<h3 id="2-裁决协议"><a class="markdownIt-Anchor" href="#2-裁决协议"></a> 2、裁决协议</h3>
+<h4 id="证书发布库"><a class="markdownIt-Anchor" href="#证书发布库"></a> 证书发布库</h4>
 <ul>
-<li>裁决人(Adjudicator)也是公正的、可信赖的第三方Trent，但他不直接参与协议。这是区别于仲裁协议的情况。</li>
-<li>一旦通信双方发生纠纷，则需要双方向裁决人提供各自掌握的证据，由裁决人来加以裁决。</li>
-<li>裁决协议建立在通信双方均是诚实的基础上。</li>
-<li>当有人怀疑发生欺骗时，可信赖的第三方就可以根据所提供的证据判定是否存在欺骗。</li>
-<li>一个好的裁决协议应当能够确定欺骗者的身份。</li>
-<li>一个好的裁决协议应当能够确定欺骗者的身份。</li>
+<li>用于集中存放CA颁发证书和证书撤销列表。</li>
+<li>支持分布式存放，以提高查询效率。</li>
+<li>LDAP协议是创建高效大规模PKI的关键技术。</li>
 </ul>
-<h3 id="3-自动执行协议"><a class="markdownIt-Anchor" href="#3-自动执行协议"></a> 3、自动执行协议</h3>
+<h4 id="密钥备份和恢复"><a class="markdownIt-Anchor" href="#密钥备份和恢复"></a> 密钥备份和恢复</h4>
 <ul>
-<li>自执行协议(self-enforcing)是最好的协议，协议本身就保证了公平性。</li>
-<li>这种协议不需要仲裁者的参与，也不需要仲裁者解决争端。</li>
-<li>如果协议中的一方试图欺骗另一方，那么另一方会立刻检测到该欺骗的发生，并停止执行协议。</li>
-<li>协议涉及的各方必须事先知道此协议的所有步骤。</li>
-<li>协议涉及的各方必须同意、遵守协议。</li>
-<li>协议必须是非模糊的。对协议的每一步都必须作出确切定义，力求避免产生误解。</li>
-<li>协议必须是完整的。对协议的每一种可能发生的情况，均需作出相应的反应。</li>
-<li>每一步操作要么是由一方或多方进行计算，要么是在各方之间进行消息传递，二者必居其一。</li>
-</ul>
-<h2 id="二-安全协议分类及基本密码协议"><a class="markdownIt-Anchor" href="#二-安全协议分类及基本密码协议"></a> 二、安全协议分类及基本密码协议</h2>
-<h3 id="1-安全协议分类"><a class="markdownIt-Anchor" href="#1-安全协议分类"></a> 1、安全协议分类</h3>
+<li>PKI提供密钥备份和恢复机制
 <ul>
-<li>根据安全协议的功能分类
-<ul>
-<li>认证协议：向一个实体提供关于另外一个实体身份的确信度。</li>
-<li>密钥建立协议：在两个通信实体之间建立共享密钥。</li>
-<li>认证的密钥建立协议：在另一实体的身份已被证实的基础之上，两个通信实体之间建立共享密钥。</li>
+<li>用户在使用数字证书的过程中，存在密钥丢失的情形。</li>
+<li>PKI仅备份和恢复用户的加密/解密密钥，而不备份和恢复用户的签名密钥（私钥）。</li>
 </ul>
 </li>
-<li>根据ISO的七层参考模型分类
+<li>密钥备份与恢复过程
 <ul>
-<li>高层协议 (higher layer protocol)（4~7层）</li>
-<li>低层协议 (lower layer protocol) （1~3层）</li>
-</ul>
-</li>
-<li>根据协议中采用的算法分类
-<ul>
-<li>双钥（或公钥）协议 (public-key protocol)</li>
-<li>单钥协议 (secret-key protocol)</li>
-<li>混合协议 (hybrid protocol)</li>
+<li>密钥备份在用户注册阶段进行；</li>
+<li>若用户声明公钥/私钥对是用于数据加密的，则CA就可以对该用户的私钥进行备份；</li>
+<li>当用户丢失密钥后，可通过可信任的密钥恢复中心或者CA完成密钥恢复。</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-密钥建立协议key-establishment-protocol"><a class="markdownIt-Anchor" href="#2-密钥建立协议key-establishment-protocol"></a> 2、密钥建立协议(Key Establishment Protocol)</h3>
-<p>密钥建立协议：是一种用于在通信双方或多方之间安全地生成和共享密钥的密码学协议。它的核心目标是通过一系列步骤，确保通信各方能够在不安全的网络环境中安全地获得一个共同的密钥，用于后续的加密通信或数据保护。</p>
+<h4 id="证书撤销"><a class="markdownIt-Anchor" href="#证书撤销"></a> 证书撤销</h4>
 <ul>
-<li>协议主要功能：
+<li>周期性发布机制：证书撤销列表CRL （Certificate Revocation List）</li>
+<li>在线证书查询机制：在线证书状态协议OCSP （Online Certificate Status Protocol）</li>
+</ul>
+<h4 id="pki应用接口"><a class="markdownIt-Anchor" href="#pki应用接口"></a> PKI应用接口</h4>
 <ul>
-<li>密钥生成：通信双方通过协议生成一个共享的密钥。</li>
-<li>密钥分发：将生成的密钥安全地分发给通信双方。</li>
-<li>密钥协商：双方通过协商共同确定一个密钥，确保只有他们知道该密钥。</li>
+<li>PKI应用接口(PKI Application Interface)：它是PKI系统与外部应用之间的桥梁，确保安全服务能无缝集成到各类系统中。</li>
 </ul>
-</li>
-<li>常见类型：
+<h3 id="3-pki的应用"><a class="markdownIt-Anchor" href="#3-pki的应用"></a> 3、PKI的应用</h3>
 <ul>
-<li>密钥传输协议：一方生成密钥并通过安全通道发给另一方，如使用公钥加密。</li>
-<li>密钥协商协议：双方共同协商生成密钥，如Diffie-Hellman密钥交换。</li>
+<li>认证服务</li>
+<li>数据完整性服务</li>
+<li>数据保密性服务</li>
+<li>不可否认服务</li>
+<li>公证服务</li>
 </ul>
-</li>
+<h2 id="二-数字证书"><a class="markdownIt-Anchor" href="#二-数字证书"></a> 二、数字证书</h2>
+<h3 id="1-数字证书的概念"><a class="markdownIt-Anchor" href="#1-数字证书的概念"></a> 1、数字证书的概念</h3>
+<ul>
+<li>数字证书的概念：将用户身份ID与其所持有的公钥PK绑定，再由CA对该用户身份及对应公钥的组合{ID||PK}进行数字签名得到S，然后将{签名S||身份ID||公钥PK}加以存储，即数字证书。</li>
+<li>包含的信息：主体名、公钥、序号、有效期、签发者名。</li>
 </ul>
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/1.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/2.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/3.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/4.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="2-数字证书的结构x509"><a class="markdownIt-Anchor" href="#2-数字证书的结构x509"></a> 2、数字证书的结构（X.509 ）</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/0.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="3-数字证书的生成"><a class="markdownIt-Anchor" href="#3-数字证书的生成"></a> 3、数字证书的生成</h3>
 <ul>
 <li>
-<p>联锁协议可以有效地抵抗中间人攻击：当仅获得一半而未获得另一半密文时，这些数据对攻击者毫无用处，因为攻击者无法解密（见书211页）。</p>
+<p>最终用户与RA和CA的关系</p>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/1.png" srcset="/img/loading.gif" lazyload class="">
+<p>注意：注册机构RA主要帮助证书机构CA与最终用户交互，<strong>注册机构RA不能签发证书，证书只能由证书机构CA签发。</strong></p>
 </li>
 <li>
-<p>在实际中实现方法：</p>
-<ul>
-<li>采用初始矢量IV的分组加密模式(CBC/CFB/OFB)，前半个消息是输出的密文，后半个消息是初始化矢量。</li>
-<li>若收发信息的双方都有计算杂凑函数值的能力，前半个消息是加密函数杂凑值，后半个消息密文输出。</li>
-</ul>
-</li>
-</ul>
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/5.png" srcset="/img/loading.gif" lazyload class="">
-<h3 id="3-认证协议"><a class="markdownIt-Anchor" href="#3-认证协议"></a> 3、认证协议</h3>
+<p>注册机构RA提供的服务</p>
 <ul>
 <li>
-<p>认证包含消息认证、数据源认证和实体认证，以防止欺骗、伪装等攻击。</p>
+<p>接受与验证最终用户的注册信息</p>
 </li>
 <li>
-<p>认证分为单向认证和双向认证。</p>
+<p>为最终用户生成密钥</p>
+</li>
+<li>
+<p>接收与授权证书撤销请求</p>
 </li>
 </ul>
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/6.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/7.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/8.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/9.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/10.png" srcset="/img/loading.gif" lazyload class="">
-<h3 id="4-认证的密钥建立协议"><a class="markdownIt-Anchor" href="#4-认证的密钥建立协议"></a> 4、认证的密钥建立协议</h3>
+</li>
+<li>
+<p>证书机构CA提供的服务</p>
 <ul>
-<li>
-<p>这类协议将认证和密钥建立结合在一起，使Alice和Bob确信他正在与可信赖的另一方进行保密通信。</p>
+<li>负责为用户生成数字证书</li>
+<li>负责为用户颁发数字证书</li>
+</ul>
 </li>
 <li>
-<p>密钥认证分为三种：</p>
+<p>数字证书的生成步骤</p>
 <ul>
-<li>隐式密钥认证：Alice只有确信另一方Bob的身份后，双方才能知道共享密钥。此类协议的中心问题是识别Bob的身份。</li>
-<li>密钥确证：Alice确信未经身份识别的Bob确实拥有某个特定密钥。此类协议的中心问题是确认Bob拥有的密钥值。</li>
-<li>显式密钥认证：Alice确信经过身份识别的Bob确实拥有某个特定密钥。<br />
-显式密钥认证 = 隐式密钥认证 + 密钥确证</li>
-</ul>
-</li>
-</ul>
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/11.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/12.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/13.png" srcset="/img/loading.gif" lazyload class="">
-<h2 id="三-密码协议的安全性分析"><a class="markdownIt-Anchor" href="#三-密码协议的安全性分析"></a> 三、密码协议的安全性分析</h2>
-<h3 id="1-攻击检验法"><a class="markdownIt-Anchor" href="#1-攻击检验法"></a> 1、攻击检验法</h3>
+<li>第一步：密钥生成
 <ul>
-<li>已知明文攻击：攻击者通过搭线窃听，收集明文/密文对。通过长期窃听，攻击者可以建立一个加密表。</li>
-<li>选择密文攻击：攻击者选择特定的密文比特串，如全“0”和全“1” ，来更快地解出密钥。</li>
-<li>预言者会话攻击：攻击者通过伪装介入协议双方的协议交互过程，将一方当做预言者“解密服务器”来对付另一方。</li>
-<li>并行会话攻击：并行会话攻击者主要针对很多简单认证协议存在的一个基本的缺陷：曾经使用过的信息流在新的协议执行过程中被使用。</li>
+<li>方式1：由用户自己生成公/私钥对</li>
+<li>方式2：由RA为用户生成公/私钥对</li>
 </ul>
-<h3 id="2-形式语言逻辑分析法"><a class="markdownIt-Anchor" href="#2-形式语言逻辑分析法"></a> 2、形式语言逻辑分析法</h3>
-<p>常用形式化语言逻辑：BAN逻辑、GNY逻辑。此外，还有AT逻辑、VO逻辑、SVO逻辑等。SVO=BAN+GNY+AT+SO</p>
-<h3 id="3-可证安全性分析法"><a class="markdownIt-Anchor" href="#3-可证安全性分析法"></a> 3、可证安全性分析法</h3>
+</li>
+<li>第二步：用户注册
 <ul>
-<li>
-<p>可证明安全是一种证明密码学方案安全性的形式化方法，它将密码学方案的安全性规约为公认的计算难题。</p>
+<li>证书申请：证书申请信息：版本、主体名、公钥信息、属性。</li>
+<li>用户将公钥和证明材料发送给RA。</li>
+</ul>
 </li>
-<li>
-<p>形式化定义（Formal Definition）：两部分组成：安全目标和攻击模型。</p>
+<li>第三步：验证信息
+<ul>
+<li>RA验证用户材料，明确是否接受用户注册。</li>
+<li>检验用户私钥的拥有证明POP (Proof Of Possession)。</li>
+</ul>
 </li>
-<li>
-<p>精确的假设（Precise Assumption）：假设必须精确陈述，且所假设内容要尽可能少。</p>
-</li>
-<li>
-<p>安全性证明（Proof of Security）：证明在某种定义及假设下，没有敌手能攻击成功该方案。</p>
+<li>第四步：证书生成
+<ul>
+<li>RA将用户申请数据信息传递给证书机构CA。</li>
+<li>证书机构验证后生成数字证书。</li>
+<li>证书机构将证书发给用户。</li>
+<li>在CA维护的证书目录中保留一份证书记录。</li>
+</ul>
 </li>
 </ul>
+</li>
+</ul>
+<h3 id="4-数字证书的签名与验证"><a class="markdownIt-Anchor" href="#4-数字证书的签名与验证"></a> 4、数字证书的签名与验证</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/2.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/3.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="5-数字证书层次与自签名数字证书"><a class="markdownIt-Anchor" href="#5-数字证书层次与自签名数字证书"></a> 5、数字证书层次与自签名数字证书</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/4.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/5.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="6-交叉证书"><a class="markdownIt-Anchor" href="#6-交叉证书"></a> 6、交叉证书</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/8.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="7-数字证书的撤销"><a class="markdownIt-Anchor" href="#7-数字证书的撤销"></a> 7、数字证书的撤销</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/6.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/7.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="8-漫游证书"><a class="markdownIt-Anchor" href="#8-漫游证书"></a> 8、漫游证书</h3>
+<ul>
+<li>数字证书及私钥移动性解决方案的弊端
+<ul>
+<li>采用智能卡和光盘存储，容易丢失和损坏。</li>
+<li>将数字证书复制到U盘上，容易丢失。</li>
+</ul>
+</li>
+<li>解决方案：采用第三方软件+可信的服务器
+<ul>
+<li>将数字证书和用户私钥存储于安全的中央服务器；</li>
+<li>用户需要数字证书时，可向该服务器认证自己；</li>
+<li>认证成功后，该服务器将证书和私钥发给用户；</li>
+<li>当用户完成工作后，该软件自动删除证书和私钥。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-pki实例"><a class="markdownIt-Anchor" href="#三-pki实例"></a> 三、PKI实例</h2>
+<h3 id="1-pki系统拓扑结构"><a class="markdownIt-Anchor" href="#1-pki系统拓扑结构"></a> 1、PKI系统拓扑结构</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/9.png" srcset="/img/loading.gif" lazyload class="">
+<p>整个系统由以下子系统构成：</p>
+<ul>
+<li>签发系统（Authority）</li>
+<li>密钥管理中心系统（KMC）</li>
+<li>申请注册系统（RA）</li>
+<li>证书发布系统（DA）</li>
+<li>在线证书状态查询系统（OCSP）</li>
+</ul>
+<h3 id="2-pki系统实例"><a class="markdownIt-Anchor" href="#2-pki系统实例"></a> 2、PKI系统实例</h3>
+<img src="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/10.png" srcset="/img/loading.gif" lazyload class="">
+<p>注意端口号</p>
 
                 
               </div>
@@ -526,8 +544,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>信息网络安全第八章 密码协议</div>
-      <div>https://wyz10006.github.io/2025/04/07/信息网络安全第八章-密码协议/</div>
+      <div>信息网络安全第九章 数字证书与公钥基础设施</div>
+      <div>https://wyz10006.github.io/2025/05/13/信息网络安全第九章-数字证书与公钥基础设施/</div>
     </div>
     <div class="license-meta">
       
@@ -539,7 +557,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年4月7日</div>
+          <div>2025年5月13日</div>
         </div>
       
       
@@ -588,18 +606,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" title="信息网络安全第九章 数字证书与公钥基础设施">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">信息网络安全第九章 数字证书与公钥基础设施</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/" title="信息网络安全第七章 数字签名">
-                        <span class="hidden-mobile">信息网络安全第七章 数字签名</span>
+                      <a href="/2025/04/07/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%86%E7%A0%81%E5%8D%8F%E8%AE%AE/" title="信息网络安全第八章 密码协议">
+                        <span class="hidden-mobile">信息网络安全第八章 密码协议</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
