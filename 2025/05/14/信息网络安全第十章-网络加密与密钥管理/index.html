@@ -1,0 +1,1042 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/%E5%A4%B4%E5%83%8F.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="竹合安木">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、网络加密的方式及实现  1、链路加密   链路加密: 它在“通信链路的每一跳(Hop) ”上对数据进行加密，确保数据在传输过程中（如路由器之间、交换机之间或网络节点之间）不会被窃听或篡改。 链路加密的特点  逐跳加密：在每个网络节点（如路由器、网关）上先被解密，再加密后转发到下一跳。 加密限于单条链路：仅对网络中两个相邻节点间之传输的数据进行加密保护。 对用户透明：用户无需管理密钥，加&#x2F;解密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息网络安全第十章 网络加密与密钥管理">
+<meta property="og:url" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="竹合安木的博客">
+<meta property="og:description" content="一、网络加密的方式及实现  1、链路加密   链路加密: 它在“通信链路的每一跳(Hop) ”上对数据进行加密，确保数据在传输过程中（如路由器之间、交换机之间或网络节点之间）不会被窃听或篡改。 链路加密的特点  逐跳加密：在每个网络节点（如路由器、网关）上先被解密，再加密后转发到下一跳。 加密限于单条链路：仅对网络中两个相邻节点间之传输的数据进行加密保护。 对用户透明：用户无需管理密钥，加&#x2F;解密">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/0.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/1.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/2.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/3.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/4.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/5.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/6.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/7.png">
+<meta property="og:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/8.png">
+<meta property="article:published_time" content="2025-05-14T07:55:26.000Z">
+<meta property="article:modified_time" content="2025-05-14T16:04:49.246Z">
+<meta property="article:author" content="竹合安木">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wyz10006.github.io/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/0.png">
+  
+  
+  
+  <title>信息网络安全第十章 网络加密与密钥管理 - 竹合安木的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/meihua.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wyz10006.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","app_key":"3LOGiBjL7YN8wgXZXHDkhDZD","server_url":"https://tge3h6ei.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>竹合安木的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/none.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息网络安全第十章 网络加密与密钥管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-14 15:55" pubdate>
+          2025年5月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信息网络安全第十章 网络加密与密钥管理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-网络加密的方式及实现"><a class="markdownIt-Anchor" href="#一-网络加密的方式及实现"></a> 一、网络加密的方式及实现</h2>
+<h3 id="1-链路加密"><a class="markdownIt-Anchor" href="#1-链路加密"></a> 1、链路加密</h3>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/0.png" srcset="/img/loading.gif" lazyload class="">
+<ul>
+<li>链路加密: 它在“通信链路的每一跳(Hop) ”上对数据进行加密，确保数据在传输过程中（如路由器之间、交换机之间或网络节点之间）不会被窃听或篡改。</li>
+<li>链路加密的特点
+<ul>
+<li>逐跳加密：在每个网络节点（如路由器、网关）上先被解密，再加密后转发到下一跳。</li>
+<li>加密限于单条链路：仅对网络中两个相邻节点间之传输的数据进行加密保护。</li>
+<li>对用户透明：用户无需管理密钥，加/解密由网络基础设施（如VPN）完成。</li>
+<li>抵抗流量分析：数据的头部和数据净载部分均被加密，可抵抗流量分析攻击。</li>
+</ul>
+</li>
+<li>链路加密的缺点
+<ul>
+<li>不保护端到端隐私：在每个中间节点会被解密并且重新加密，这意味着运营商可访问明文。</li>
+<li>不适合大型网络：随着节点数增加，密码机的需求量会很大，部署成本很高。</li>
+<li>依赖网络设备安全：如果加密设备（如路由器）遭到入侵，整个链路的安全性将受到冲击。</li>
+<li>密钥管理复杂：大规模部署需要协调所有中间节点，管理密钥交换。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-节点加密"><a class="markdownIt-Anchor" href="#2-节点加密"></a> 2、节点加密</h3>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/1.png" srcset="/img/loading.gif" lazyload class="">
+<ul>
+<li>
+<p>节点加密：它更注重对网络中间节点的安全保护，使用特殊的加密算法，在数据经过每个节点时都进行加密和解密操作，从而防止数据在节点处被窃取或篡改。</p>
+</li>
+<li>
+<p>节点加密的特点</p>
+<ul>
+<li>加密过程在节点处进行：消息的加解密在模块中进行，这使消息内容不会被泄密。</li>
+<li>保护节点处数据安全：数据在每个节点会被解密并重新加密，以确保明文不通过中间节点。</li>
+<li>减少单点安全风险：某个节点遭到入侵，攻击者仅能获取当前跳的明文，而非整个明文。</li>
+<li>适合复杂网络环境：在计算云等场景中，能提供比纯链路加密更强的安全性。</li>
+</ul>
+</li>
+<li>
+<p>节点加密的缺点</p>
+<ul>
+<li>存在中间节点数据泄漏：在每个中间节点会暂时解密数据，并存在数据泄漏的风险。</li>
+<li>性能低于链路加密：因需要在多个节点加密和解密，会引入更高的时间延迟。</li>
+<li>密钥管理复杂性高：需要维护密钥分发体系（如PKI系统），以确保只有授权节点能解密数据。</li>
+<li>不能抵抗流量分析：由于中间节点仍可看到明文报头，仍然面临流量分析的风险。</li>
+</ul>
+</li>
+<li>
+<p>节点加密与链路加密的异同</p>
+<ul>
+<li>相同点
+<ul>
+<li>在中间节点，先对消息进行解密，然后再进行加密。</li>
+<li>在通信链路上所传输的消息均为密文。</li>
+<li>加密过程对用户透明，即用户对加解密操作没有感觉。</li>
+</ul>
+</li>
+<li>不同点
+<ul>
+<li>链路加密是由专门的加密设备或网卡中的安全模块完成的；节点加密的加密功能是由节点自身的安全模块完成的。</li>
+<li>链路加密中间节点中的消息是以明文形式存在；而节点加密不允许节点机看到明文消息，它先把收到的消息进行解密，再使用一个不同的密钥进行加密，但要保持报头为明文。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-端到端加密"><a class="markdownIt-Anchor" href="#3-端到端加密"></a> 3、端到端加密</h3>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/2.png" srcset="/img/loading.gif" lazyload class="">
+<ul>
+<li>端到端加密：数据从发送设备到接收设备的整个传输过程中，所有中间节点（如服务器、路由器、ISP等）均无法解密内容，以确保数据的隐私性和安全性。</li>
+<li>端到端加密的特点
+<ul>
+<li>全程加密：中间节点无访问权限，中间环节（如运营商、云服务器）只能看到密文（报头不加密）。</li>
+<li>仅通信双方持有密钥：服务器不存储密钥，即使黑客入侵，也无法窃取数据。</li>
+<li>可防止中间人攻击：通过身份认证机制，以确保通信双方身份真实，避免伪造攻击。</li>
+</ul>
+</li>
+<li>端到端加密的缺点
+<ul>
+<li>存在元数据泄漏风险：通信全程数据报头为明文，存在泄露身份、IP地址风险。</li>
+<li>无法抵抗终端设备入侵：若终端感染木马病毒，可能造成密钥泄漏。</li>
+<li>不能抵抗流量分析：因中间节点仍可看到明文报头，仍然面临流量分析的风险。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-混合加密"><a class="markdownIt-Anchor" href="#4-混合加密"></a> 4、混合加密</h3>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/3.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="二-硬件-软件加密及有关问题"><a class="markdownIt-Anchor" href="#二-硬件-软件加密及有关问题"></a> 二、硬件、软件加密及有关问题</h2>
+<h3 id="1-硬件加密"><a class="markdownIt-Anchor" href="#1-硬件加密"></a> 1、硬件加密</h3>
+<ul>
+<li>
+<p>优点：</p>
+<ul>
+<li><strong>加密速度快</strong>，例如DES和RSA，通常采用专用加密硬件实现。</li>
+<li><strong>加密安全性高</strong>，硬件可以封装，可以防篡改，难以入侵修改。</li>
+<li><strong>硬件易于安装</strong>，多数硬件的应用独立于主机，而软件加密实现需在操作系统的底层安装。</li>
+</ul>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li><strong>硬件加密费用高</strong>，需要购买专门硬件的保密机设备，价格较高。</li>
+<li><strong>需要购买一次性永久授权</strong>，无法方便地实现试用版本和按需购买。</li>
+<li>硬件的存在提高了生产、初始化、物流、安装和维护的成本。</li>
+<li>安装驱动和客户端组件以及额外的硬件影响了客户的使用体验。</li>
+<li>难以进行基于互联网的自动版本更新、维护、跟踪及售后管理。</li>
+</ul>
+</li>
+<li>
+<p>硬件的种类：</p>
+<ul>
+<li>自配套加密模块</li>
+<li>通信用加密盒</li>
+<li>PC插件板</li>
+<li>加密TF卡</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-软件加密"><a class="markdownIt-Anchor" href="#2-软件加密"></a> 2、软件加密</h3>
+<ul>
+<li>
+<p>优点：</p>
+<ul>
+<li>软件加密灵活轻便，可安装于多种操作系统和CPU的机器上。</li>
+<li>软件加密节约成本，购买软件通常要比购买硬件产品便宜。</li>
+<li>可以利用现有的加密模块，所有主流的操作系统上都有加密软件。</li>
+</ul>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li>密钥管理困难，加密密钥有时可能以明文形式存储在硬盘上。</li>
+<li>明文和密钥文件容易泄露，加密后明文和密钥必须及时清除。</li>
+<li>容易遭受暴力破解攻击，软件加密密钥短，黑客可暴力破解。</li>
+<li>加密过程中的数据易被窃取，黑客可能进入计算机内存读取数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-密钥管理的基本概念"><a class="markdownIt-Anchor" href="#三-密钥管理的基本概念"></a> 三、密钥管理的基本概念</h2>
+<ul>
+<li>
+<p>密钥管理是处理密钥从产生到最终销毁的整个过程中的有关问题，包括系统的初始化以及密钥的产生、存储、备份/恢复、装入、分配、保护、更新、控制、丢失、撤销和销毁等内容。</p>
+</li>
+<li>
+<p>密钥的种类：</p>
+<ul>
+<li>基本（初始）密钥（primary key）：是由用户选定或由系统分配给他的、可在较长时间内由一对用户所专用的密钥，记为 k<sub>p</sub>。</li>
+<li>主机主密钥（host master key）：是对密钥加密密钥进行加密的密钥，存储于主机处理器中，记为 k<sub>m</sub>。</li>
+<li>密钥加密密钥（key-encrypting key）：用于对所传送的会话或文件密钥进行加密的密钥，也称次主密钥，记为 k<sub>e</sub>。</li>
+<li>会话密钥 （session key）：两个通信终端用户在一次通话或数据交换时所用的密钥，记为 k<sub>s</sub>。</li>
+<li>数据加密密钥（data-encrypting key）：也称为工作密钥，记为k<sub>w</sub>。</li>
+<li>双钥体制下，还有公钥和私钥、签名密钥和验证密钥之分。</li>
+</ul>
+</li>
+</ul>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/4.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="四-密钥生成"><a class="markdownIt-Anchor" href="#四-密钥生成"></a> 四、密钥生成</h2>
+<ul>
+<li>
+<p>25%以上的口令可以使用字典式攻击（Dictionary Attack）攻破。</p>
+</li>
+<li>
+<p>好的密钥生成：</p>
+<ul>
+<li>真正随机、等概率，如掷硬币、掷骰子等。</li>
+<li>应尽量避免使用特定算法的弱密钥。</li>
+<li>双钥系统的密钥必须满足一定的数学关系。</li>
+<li>密钥一般选用伪随机数，循环周期应尽可能大。</li>
+<li>采用密钥揉搓或杂凑技术，变换成伪随机串存放。</li>
+</ul>
+</li>
+<li>
+<p>不同等级的密钥的产生方式不同</p>
+<ul>
+<li>主机主密钥：因量小，可用投硬币、掷骰子、晶体管噪声产生器等方法生成。</li>
+<li>密钥加密密钥：可用密码算法、伪随机数产生器等方法生成。</li>
+<li>会话/工作密钥：在密钥加密密钥的控制下由安全算法产生。</li>
+</ul>
+</li>
+<li>
+<p>主机主密钥是控制产生其他加密密钥的密钥，且要长期使用，所以其安全性至关重要。</p>
+</li>
+<li>
+<p>在实际应用中，一定要保证主机主密钥的<strong>完全随机性</strong>、<strong>不可重复性</strong>和<strong>不可预测性</strong>。</p>
+</li>
+</ul>
+<h2 id="五-密钥分配"><a class="markdownIt-Anchor" href="#五-密钥分配"></a> 五、密钥分配</h2>
+<ul>
+<li>
+<p>密钥分配方案研究的是密码系统中密钥的分发和传送问题。</p>
+</li>
+<li>
+<p>从本质上讲，密钥分配为通信双方建立用于信息加解密、数字签名等操作的密钥，以实现保密通信或身份认证等。</p>
+</li>
+</ul>
+<h3 id="1-基本方法"><a class="markdownIt-Anchor" href="#1-基本方法"></a> 1、基本方法</h3>
+<ul>
+<li>利用安全信道传递
+<ul>
+<li>由通信双方直接面议或通过可靠信使递送密钥。</li>
+<li>可以将密钥分拆成几部分分别递送：只适用于传递少量密钥。</li>
+</ul>
+</li>
+<li>利用双钥体制建立安全信道
+<ul>
+<li>公钥体制：发送方用接收方公钥对会话密钥加密，再将密文传送给接收方。接收方接收到密文后，使用接收方私钥解密，即可获得会话密钥。</li>
+<li>采用DH或RSA、ECC等公钥体制实现。</li>
+<li>借助可信密钥管理中心（KDC）进行分配。</li>
+</ul>
+</li>
+<li>利用量子技术实现密钥传递
+<ul>
+<li>以光子的量子态表征信息。</li>
+<li>量子比特与经典比特的区别：测不准原理。</li>
+<li>可提供不可窃听、不可破译的安全保密通信。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-密钥分配的基本模式"><a class="markdownIt-Anchor" href="#2-密钥分配的基本模式"></a> 2、密钥分配的基本模式</h3>
+<ul>
+<li>
+<p>点对点密钥分配模式：Alice和Bob采用他们之间共享的基本密钥加密传送会话密钥k。</p>
+</li>
+<li>
+<p>密钥分配中心（KDC）模式：</p>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/5.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+<li>
+<p>密钥传递中心（KTC）模式：</p>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/6.png" srcset="/img/loading.gif" lazyload class="">
+</li>
+</ul>
+<h3 id="3-密钥的注入"><a class="markdownIt-Anchor" href="#3-密钥的注入"></a> 3、密钥的注入</h3>
+<ul>
+<li>主机主密钥的注入：由可信的保密员在非常安全的条件下装入主机，一旦装入，就不能再读取。</li>
+<li>密钥的正确性验证方法：
+<ul>
+<li>密钥枪将一随机数R<sub>N</sub>注入保密机</li>
+<li>保密机用主密钥K<sub>m</sub>加密：E<sub>K</sub><sub>m</sub>(R<sub>N</sub>)</li>
+<li>保密机计算K<sub>m</sub>的杂凑函数值：h(K<sub>m</sub>)</li>
+<li>保密机将E<sub>K</sub><sub>m</sub>(R<sub>N</sub>)和h(K<sub>m</sub>)回送到密钥枪</li>
+<li>密钥枪检验h(K<sub>m</sub>)值，并检验解密后的R<sub>N</sub></li>
+</ul>
+</li>
+<li>终端机主密钥的注入：由可信的保密员装入终端，可用专用密钥注入工具（如密钥枪）实施密钥注入操作。</li>
+</ul>
+<h2 id="六-密钥的保护-存储与备份"><a class="markdownIt-Anchor" href="#六-密钥的保护-存储与备份"></a> 六、密钥的保护、存储与备份</h2>
+<h3 id="1-密钥的分级保护结构"><a class="markdownIt-Anchor" href="#1-密钥的分级保护结构"></a> 1、密钥的分级保护结构</h3>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/7.png" srcset="/img/loading.gif" lazyload class="">
+<h3 id="2-密钥的储存与备份"><a class="markdownIt-Anchor" href="#2-密钥的储存与备份"></a> 2、密钥的储存与备份</h3>
+<ul>
+<li>几种密钥存储的方法
+<ul>
+<li>每个用户都有一个用户密钥文件，只与一个人绑定。</li>
+<li>一半密钥存入ROM卡或IC智能卡，另一半存入终端中。</li>
+<li>难记的密钥可以密文形式存储，用密钥加密密钥对其加密。</li>
+<li>采用易记的口令启动密钥产生器，再用确定性算法生成密钥。</li>
+</ul>
+</li>
+<li>密钥的备份
+<ul>
+<li>交给安全管理人员，放在安全的地方保管。</li>
+<li>采用密钥分拆协议，将密钥拆分成几部分存储。</li>
+</ul>
+</li>
+</ul>
+<h2 id="七-密钥的撤销-过期与销毁"><a class="markdownIt-Anchor" href="#七-密钥的撤销-过期与销毁"></a> 七、密钥的撤销、过期与销毁</h2>
+<ul>
+<li>密钥安全是密码协议、算法和密码设备安全的基本条件。</li>
+<li>密钥注销与销毁：对于不再需要的密钥或已被注销（从所有记录中除名）的用户密钥，要将其所有副本销毁。</li>
+<li>密钥恢复：如密钥丢失但未被泄露（如设备故障），就可以用安全方式从密钥备份中恢复。</li>
+<li>密钥吊销：如密钥丢失，或因其他原因，在密钥未过期之时，需将其从正常使用的集合中删除，即密钥吊销。</li>
+</ul>
+<img src="/2025/05/14/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/8.png" srcset="/img/loading.gif" lazyload class="">
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">信息网络安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息网络安全第十章 网络加密与密钥管理</div>
+      <div>https://wyz10006.github.io/2025/05/14/信息网络安全第十章-网络加密与密钥管理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>竹合安木</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年5月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/13/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E4%B8%8E%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" title="信息网络安全第九章 数字证书与公钥基础设施">
+                        <span class="hidden-mobile">信息网络安全第九章 数字证书与公钥基础设施</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Tge3H6EIi2Wf2Gpf9l7LsHS1-gzGzoHsz","appKey":"3LOGiBjL7YN8wgXZXHDkhDZD","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://tge3h6ei.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/meihua.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
